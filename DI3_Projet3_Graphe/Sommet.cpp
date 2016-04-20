@@ -1,10 +1,14 @@
 #include "Sommet.h"
 
 
-CSommet::CSommet(void)
+CSommet::CSommet(const CSommet& SMTparam)
 {
 }
 
+CSommet::CSommet(unsigned int uiParam)
+{
+
+}
 
 CSommet::~CSommet(void)
 {

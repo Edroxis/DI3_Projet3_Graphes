@@ -14,6 +14,5 @@ public:
 
 public:
 	void GPHajouterSommet(CSommet& SMTparam);
-	void GPHajouterArc(CSommet& SMTdepart);
 };
 
