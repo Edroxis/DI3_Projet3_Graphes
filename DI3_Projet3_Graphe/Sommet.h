@@ -6,14 +6,17 @@ class CSommet
 {
 private:
 	unsigned int uinumero;
-	unsigned int uitotal;
 	unsigned int uinbArrivant;
 	unsigned int uinbPartant;
 	CArc ** ppARCarrivant;
 	CArc ** ppARCpartant;
 
 public:
-	CSommet(void);
+	CSommet(const CSommet& SMTparam);
+	CSommet(unsigned int uiParam);
 	~CSommet(void);
+
+public:
+	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 };
 
