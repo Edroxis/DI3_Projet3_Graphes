@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DI3_Projet3_Graphe", "DI3_Projet3_Graphe\DI3_Projet3_Graphe.vcxproj", "{EC9A9B84-B44B-484F-B84D-432328F188B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC9A9B84-B44B-484F-B84D-432328F188B9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EC9A9B84-B44B-484F-B84D-432328F188B9}.Debug|Win32.Build.0 = Debug|Win32
+		{EC9A9B84-B44B-484F-B84D-432328F188B9}.Release|Win32.ActiveCfg = Release|Win32
+		{EC9A9B84-B44B-484F-B84D-432328F188B9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
