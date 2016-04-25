@@ -12,7 +12,6 @@ private:
 
 public:
 	CSommet(const CSommet& SMTparam);
-	CSommet(unsigned int uiParam);
 	~CSommet(void);
 
 public:
