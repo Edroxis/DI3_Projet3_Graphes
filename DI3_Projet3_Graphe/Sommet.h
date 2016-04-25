@@ -17,10 +17,17 @@ public:
 
 public:
 	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
-	CArc const * const * getPartant() const;
-	CArc const * const * getArrivant() const;
-	unsigned int getNbArrivant();
-	unsigned int getNbPartant();
+	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
+	CArc const * const * SMTgetPartant() const;
+	CArc const * const * SMTgetArrivant() const;
+	unsigned int SMTgetNbArrivant() const;
+	unsigned int SMTgetNbPartant() const;
 
+
+private:
+	void SMTajouterArcPartant(CSommet& SMTdest);
+	void SMTajouterArcArrivant(CSommet& SMTdest);
+	void SMTsupprimerArcPartant(CSommet& SMTdest);
+	void SMTsupprimerArcArrivant(CSommet& SMTdest);
 };
 

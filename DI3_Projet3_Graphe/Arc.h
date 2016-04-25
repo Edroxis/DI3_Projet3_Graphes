@@ -9,7 +9,10 @@ private:
 	CSommet * pSMTdest;
 
 public:
-	CArc(void);
+	CArc(CSommet& SMTparam);
 	~CArc(void);
+
+public:
+	CSommet& ARCgetDest();
 };
 

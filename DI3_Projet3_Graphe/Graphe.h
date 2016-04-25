@@ -14,5 +14,8 @@ public:
 
 public:
 	void GPHajouterSommet(CSommet& SMTparam);
+	void GPHsupprimerSommet(CSommet& SMTparam);
+	CSommet& GPHgetSommet(unsigned int uiparam);
+	unsigned int GPHgetTotalSommet();
 };
 

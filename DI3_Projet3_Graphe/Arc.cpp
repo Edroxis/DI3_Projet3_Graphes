@@ -1,7 +1,7 @@
 #include "Arc.h"
 
 
-CArc::CArc(void)
+CArc::CArc(CSommet& SMTparam)
 {
 }
 
