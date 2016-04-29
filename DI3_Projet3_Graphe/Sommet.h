@@ -16,7 +16,6 @@ public:
 
 public:
 	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
-	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 	CArc const * const * SMTgetPartant() const;
 	CArc const * const * SMTgetArrivant() const;
 	unsigned int SMTgetNbArrivant() const;
