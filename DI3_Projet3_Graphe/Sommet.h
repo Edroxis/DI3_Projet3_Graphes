@@ -5,6 +5,7 @@
 class CSommet
 {
 private:
+    unsigned int numero;
 	unsigned int uinbArrivant;
 	unsigned int uinbPartant;
 	CArc ** ppARCarrivant;
@@ -12,6 +13,7 @@ private:
 
 public:
 	CSommet(const CSommet& SMTparam);
+	CSommet(unsigned int numero);
 	~CSommet(void);
 
 public:

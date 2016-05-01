@@ -28,8 +28,7 @@ void CGrapheChargeurFichier::GCFchargeFichier(char * chemin)
 {
 	//Lecture de tout le fichier
 	//Si =, stocker partie gauche dans key, partie droite dans value au même indice
-	char * cpline = new char[64];
-	int iindexEqual;
+	char * pcligne = new char[64];
 
 	ifstream fichier(chemin, ios::in);  // on ouvre le fichier en lecture
 
@@ -37,31 +36,33 @@ void CGrapheChargeurFichier::GCFchargeFichier(char * chemin)
 	{
 	    while(!fichier.eof())
 	    {
-	        fichier.getline(cpline,64);
-            //cout << cpline << "\n";
-            iindexEqual = GCFfindChar(cpline, '=');
-            if(iindexEqual != -1)
-                cpline[iindexEqual] = 0;
-            GCFajouterCouple(cpline, cpline+iindexEqual+1);
-            //TODO gérer cas ou virgule dans la ligne
-	    }
-	    delete cpline;
+	        fichier.getline(pcligne,64);
+	        GCFsuppEspace(pcligne);
+	        GCFseparerMembres(pcligne);
+        }
+	    delete pcligne;
     }
 	else
 		cerr << "Impossible d'ouvrir le fichier " << chemin << " !" << endl;
 }
 
-/*int CGrapheChargeurFichier::GCFtrouverCle(char * cleCherchee)
+unsigned int CGrapheChargeurFichier::GCFtrouverCle(char * pccleCherchee, unsigned int uiindexMin)
 {
 	//Chercher valeur en param dans le tableau cle
 	//Renvoyer indice si trouvé
 	//sinon renvoyer -1
+	unsigned int uiboucle;
+	for(uiboucle = uiindexMin; uiboucle < uiGCFargc; uiboucle++)
+        if(GCFequalsString(ppcGCFcle[uiboucle], pccleCherchee))
+           return uiboucle;
+    return -1;
 }
 
-char * CGrapheChargeurFichier::GCFtrouverValeur(int indice)
+char * CGrapheChargeurFichier::GCFtrouverValeur(unsigned int uiindice)
 {
 	//Renvoyer la valeur correspondante a la cle du tableau valeur
-}*/
+	return ppcGCFvaleur[uiindice];
+}
 
 void CGrapheChargeurFichier::GCFafficherTabs()
 {
@@ -104,7 +105,7 @@ bool CGrapheChargeurFichier::GCFequalsString(char * ch1, char * ch2)
 	return true;
 }
 
-int CGrapheChargeurFichier::GCFfindChar(char * ch1, char c)
+int CGrapheChargeurFichier::GCFtrouverChar(char * ch1, char c)
 {
     int iboucle = 0;
     while(*ch1 != 0)
@@ -117,7 +118,7 @@ int CGrapheChargeurFichier::GCFfindChar(char * ch1, char c)
     return -1;
 }
 
-int CGrapheChargeurFichier::GCFstrLength(char * ch1)
+int CGrapheChargeurFichier::GCFlongeurChaine(char * ch1)
 {
     int iboucle = 0;
     while(*ch1 != 0)
@@ -130,7 +131,7 @@ int CGrapheChargeurFichier::GCFstrLength(char * ch1)
 
 char * CGrapheChargeurFichier::GCFstrDup(char * ch1)
 {
-    int istrSize = GCFstrLength(ch1);
+    int istrSize = GCFlongeurChaine(ch1);
     char * cpres = new char[istrSize];
     while(*ch1 != 0)
     {
@@ -142,4 +143,39 @@ char * CGrapheChargeurFichier::GCFstrDup(char * ch1)
     return cpres;
 }
 
+void CGrapheChargeurFichier::GCFseparerMembres(char * chaine)
+{
+    int iindexEgal, iindexVirgule;
+    iindexVirgule = GCFtrouverChar(chaine, ',');
 
+    if(iindexVirgule != -1)
+    {
+        chaine[iindexVirgule] = 0;
+        GCFseparerMembres(chaine);
+        GCFseparerMembres(chaine + iindexVirgule + 1);
+        return;
+    }
+
+    iindexEgal = GCFtrouverChar(chaine, '=');
+    chaine[iindexEgal] = 0;
+    GCFajouterCouple(chaine, chaine+iindexEgal+1);
+}
+
+void CGrapheChargeurFichier::GCFsuppEspace(char * pcchaine)
+{
+    int espaceCount = 0;
+    char * pctemp;
+    while(*pcchaine != 0)
+    {
+        pctemp = pcchaine;
+        while(*pctemp == ' ')
+        {
+            espaceCount++;
+            pctemp++;
+        }
+        *pcchaine = *(pcchaine+espaceCount);
+        pcchaine++;
+        if(*pcchaine == 0)
+            break;
+    }
+}

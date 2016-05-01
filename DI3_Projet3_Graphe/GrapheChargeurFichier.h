@@ -13,16 +13,18 @@ private:
 public:
 	CGrapheChargeurFichier(void);
 	~CGrapheChargeurFichier(void);
-	void GCFchargeFichier(char * chemin);
-	int GCFtrouverCle(char * cleCherchee);
-	char * GCFtrouverValeur(int indice);
+	void GCFchargeFichier(char * pcchemin);
+	unsigned int GCFtrouverCle(char * pccleCherchee, unsigned int uiindexMin=0);
+	char * GCFtrouverValeur(unsigned int uiindice);
 	void GCFafficherTabs();
-	bool GCFequalsString(char * ch1, char * ch2);
-    int GCFfindChar(char * ch1, char c);
-    int GCFstrLength(char * ch1);
-    char * GCFstrDup(char * ch1);
+	bool GCFequalsString(char * pcchaine1, char * pcchaine2);
+    int GCFtrouverChar(char * pcchaine, char c);
+    int GCFlongeurChaine(char * pcchaine);
+    char * GCFstrDup(char * pcchaine);
+    void GCFsuppEspace(char * pcchaine);
 
 private:
-	void GCFajouterCouple(char * cleParam, char * value);
+	void GCFajouterCouple(char * pccleParam, char * pcvalue);
+	void GCFseparerMembres(char * pcchaine);
 };
 
