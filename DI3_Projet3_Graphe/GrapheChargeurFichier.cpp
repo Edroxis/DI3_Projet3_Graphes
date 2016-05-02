@@ -1,10 +1,11 @@
 #include "GrapheChargeurFichier.h"
 #include <stdlib.h>
 #include <cstdio>
+#include "MyString.h"
 
 using namespace std;
 
-CGrapheChargeurFichier::CGrapheChargeurFichier(void)
+CGrapheChargeurFichier::CGrapheChargeurFichier()
 {
 	uiGCFargc = 0;
 	ppcGCFcle = (char **) malloc(0 * sizeof(char*));
@@ -12,7 +13,7 @@ CGrapheChargeurFichier::CGrapheChargeurFichier(void)
 }
 
 
-CGrapheChargeurFichier::~CGrapheChargeurFichier(void)
+CGrapheChargeurFichier::~CGrapheChargeurFichier()
 {
 	unsigned int iboucle;
 	for(iboucle = 0; iboucle < uiGCFargc; iboucle++)
@@ -24,11 +25,11 @@ CGrapheChargeurFichier::~CGrapheChargeurFichier(void)
 	free(ppcGCFvaleur);
 }
 
-void CGrapheChargeurFichier::GCFchargeFichier(char * chemin)
+void CGrapheChargeurFichier::GCFchargeFichier(char const * const chemin)
 {
 	//Lecture de tout le fichier
 	//Si =, stocker partie gauche dans key, partie droite dans value au même indice
-	char * pcligne = new char[64];
+	char pcligne[64];
 
 	ifstream fichier(chemin, ios::in);  // on ouvre le fichier en lecture
 
@@ -37,10 +38,9 @@ void CGrapheChargeurFichier::GCFchargeFichier(char * chemin)
 	    while(!fichier.eof())
 	    {
 	        fichier.getline(pcligne,64);
-	        GCFsuppEspace(pcligne);
+	        CMyString::MSTsuppEspace(pcligne);
 	        GCFseparerMembres(pcligne);
         }
-	    delete pcligne;
     }
 	else
 		cerr << "Impossible d'ouvrir le fichier " << chemin << " !" << endl;
@@ -53,7 +53,7 @@ unsigned int CGrapheChargeurFichier::GCFtrouverCle(char * pccleCherchee, unsigne
 	//sinon renvoyer -1
 	unsigned int uiboucle;
 	for(uiboucle = uiindexMin; uiboucle < uiGCFargc; uiboucle++)
-        if(GCFequalsString(ppcGCFcle[uiboucle], pccleCherchee))
+        if(strcmp(ppcGCFcle[uiboucle], pccleCherchee) == 0)
            return uiboucle;
     return -1;
 }
@@ -81,72 +81,19 @@ void CGrapheChargeurFichier::GCFajouterCouple(char * cleParam, char * valeurPara
 		//réallouer cle par realloc
     ppcGCFcle = (char **) realloc(ppcGCFcle, uiGCFargc * sizeof(char*));
 		//cle alloué par new
-    ppcGCFcle[uiGCFargc-1] = GCFstrDup(cleParam);
+    ppcGCFcle[uiGCFargc-1] = _strdup(cleParam);
 
 	//Ajouter valeur au tableau valeur
         //réallouer valeur par realloc
     ppcGCFvaleur = (char **) realloc(ppcGCFvaleur, uiGCFargc * sizeof(char*));
 		//valeur alloué par new
-    ppcGCFvaleur[uiGCFargc-1] = GCFstrDup(valeurParam);
-}
-
-bool CGrapheChargeurFichier::GCFequalsString(char * ch1, char * ch2)
-{
-	//Teste égalité de 2 chaines
-	while(*ch1 != 0 && *ch2 != 0)
-	{
-		if(*ch1 != *ch2)
-			return false;
-		ch1++;
-		ch2++;
-	}
-	if(*ch1 != 0 || *ch2!=0)
-		return false;
-	return true;
-}
-
-int CGrapheChargeurFichier::GCFtrouverChar(char * ch1, char c)
-{
-    int iboucle = 0;
-    while(*ch1 != 0)
-    {
-        if(*ch1 == c)
-            return iboucle;
-        iboucle++;
-        ch1++;
-    }
-    return -1;
-}
-
-int CGrapheChargeurFichier::GCFlongeurChaine(char * ch1)
-{
-    int iboucle = 0;
-    while(*ch1 != 0)
-    {
-        iboucle++;
-        ch1++;
-    }
-    return iboucle;
-}
-
-char * CGrapheChargeurFichier::GCFstrDup(char * ch1)
-{
-    int istrSize = GCFlongeurChaine(ch1);
-    char * cpres = new char[istrSize];
-    while(*ch1 != 0)
-    {
-        *cpres = *ch1;
-        cpres++;
-        ch1++;
-    }
-    cpres -= istrSize;
-    return cpres;
+    ppcGCFvaleur[uiGCFargc-1] = _strdup(valeurParam);
 }
 
 void CGrapheChargeurFichier::GCFseparerMembres(char * chaine)
 {
     int iindexEgal, iindexVirgule;
-    iindexVirgule = GCFtrouverChar(chaine, ',');
+	iindexVirgule = CMyString::MSTtrouverChar(chaine, ',');
 
     if(iindexVirgule != -1)
     {
@@ -156,26 +103,7 @@ void CGrapheChargeurFichier::GCFseparerMembres(char * chaine)
         return;
     }
 
-    iindexEgal = GCFtrouverChar(chaine, '=');
+	iindexEgal = CMyString::MSTtrouverChar(chaine, '=');
     chaine[iindexEgal] = 0;
     GCFajouterCouple(chaine, chaine+iindexEgal+1);
-}
-
-void CGrapheChargeurFichier::GCFsuppEspace(char * pcchaine)
-{
-    int espaceCount = 0;
-    char * pctemp;
-    while(*pcchaine != 0)
-    {
-        pctemp = pcchaine;
-        while(*pctemp == ' ')
-        {
-            espaceCount++;
-            pctemp++;
-        }
-        *pcchaine = *(pcchaine+espaceCount);
-        pcchaine++;
-        if(*pcchaine == 0)
-            break;
-    }
 }

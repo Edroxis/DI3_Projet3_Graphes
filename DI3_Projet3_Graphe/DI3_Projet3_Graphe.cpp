@@ -6,10 +6,12 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	CGraphe g1("graphe1.txt");
+	CGrapheChargeurFichier test;
+	test.GCFchargeFichier("graphe1.txt");
+	test.GCFafficherTabs();
 
 	int e;
-	scanf("%d",&e);
+	scanf_s("%d",&e);
 	return 0;
 }
 

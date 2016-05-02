@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GRAPHE_H
+#define GRAPHE_H
 
 #include "Sommet.h"
 
@@ -10,15 +11,20 @@ private:
 	unsigned int uiGPHtotalArc;
 
 public:
-	CGraphe(void);
-	CGraphe(char * chemin);
-	~CGraphe(void);
+	CGraphe();
+	CGraphe(char const * const chemin);
+	~CGraphe();
 
-public:
 	void GPHajouterSommet(CSommet& SMTparam);
 	void GPHsupprimerSommet(CSommet& SMTparam);
 	CSommet& GPHgetSommet(int inumero);
-	unsigned int GPHgetTotalSommet();
+	unsigned int GPHgetTotalSommet() const;
 	unsigned int GPHgetTotalArc();
 };
 
+inline unsigned int CGraphe::GPHgetTotalSommet() const
+{
+	return uiGPHtotalSommet;
+}
+
+#endif

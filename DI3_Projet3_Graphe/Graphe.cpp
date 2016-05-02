@@ -2,12 +2,14 @@
 #include "GrapheChargeurFichier.h"
 #include <stdlib.h>
 
-CGraphe::CGraphe(void)
+CGraphe::CGraphe()
 {
+	ppSMTliste = 0;
+	uiGPHtotalSommet = 0;
+	uiGPHtotalArc = 0;
 }
 
-
-CGraphe::CGraphe(char * chemin)
+CGraphe::CGraphe(char const * const chemin)
 {
     unsigned int uiindexSommet, uiindexArc;
     CGrapheChargeurFichier chargeur;
@@ -25,6 +27,11 @@ CGraphe::CGraphe(char * chemin)
     //TODO ajouter arcs
 }
 
-CGraphe::~CGraphe(void)
+CGraphe::~CGraphe()
 {
+}
+
+void CGraphe::GPHajouterSommet(CSommet& SMTparam)
+{
+
 }

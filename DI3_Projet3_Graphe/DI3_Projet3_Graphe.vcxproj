@@ -77,15 +77,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Arc.cpp" />
+    <ClCompile Include="Cexception.cpp" />
     <ClCompile Include="DI3_Projet3_Graphe.cpp" />
     <ClCompile Include="Graphe.cpp" />
     <ClCompile Include="GrapheChargeurFichier.cpp" />
+    <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Sommet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arc.h" />
+    <ClInclude Include="Cexception.h" />
     <ClInclude Include="Graphe.h" />
     <ClInclude Include="GrapheChargeurFichier.h" />
+    <ClInclude Include="MyString.h" />
     <ClInclude Include="Sommet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

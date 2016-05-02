@@ -1,8 +1,9 @@
+#ifndef GRAPHE_CHARGEUR_FICHIER_H
+#define GRAPHE_CHARGEUR_FICHIER_H
+
 #include <iostream>
 #include <fstream>
 
-
-#pragma once
 class CGrapheChargeurFichier
 {
 private:
@@ -11,20 +12,16 @@ private:
 	char ** ppcGCFvaleur;
 
 public:
-	CGrapheChargeurFichier(void);
-	~CGrapheChargeurFichier(void);
-	void GCFchargeFichier(char * pcchemin);
+	CGrapheChargeurFichier();
+	~CGrapheChargeurFichier();
+	void GCFchargeFichier(char const * const pcchemin);
 	unsigned int GCFtrouverCle(char * pccleCherchee, unsigned int uiindexMin=0);
 	char * GCFtrouverValeur(unsigned int uiindice);
 	void GCFafficherTabs();
-	bool GCFequalsString(char * pcchaine1, char * pcchaine2);
-    int GCFtrouverChar(char * pcchaine, char c);
-    int GCFlongeurChaine(char * pcchaine);
-    char * GCFstrDup(char * pcchaine);
-    void GCFsuppEspace(char * pcchaine);
 
 private:
 	void GCFajouterCouple(char * pccleParam, char * pcvalue);
 	void GCFseparerMembres(char * pcchaine);
 };
 
+#endif
