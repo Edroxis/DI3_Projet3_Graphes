@@ -29,7 +29,7 @@ void CGrapheChargeurFichier::GCFchargeFichier(char const * const chemin)
 {
 	//Lecture de tout le fichier
 	//Si =, stocker partie gauche dans key, partie droite dans value au même indice
-	char pcligne[64];
+	char * pcligne = (char *) malloc(64*sizeof(char));
 
 	ifstream fichier(chemin, ios::in);  // on ouvre le fichier en lecture
 
@@ -39,11 +39,13 @@ void CGrapheChargeurFichier::GCFchargeFichier(char const * const chemin)
 	    {
 	        fichier.getline(pcligne,64);
 	        CMyString::MSTsuppEspace(pcligne);
-	        GCFseparerMembres(pcligne);
+			if(CMyString::MSTtrouverChar(pcligne, '=') != -1)
+				GCFseparerMembres(pcligne);
         }
     }
 	else
 		cerr << "Impossible d'ouvrir le fichier " << chemin << " !" << endl;
+	free(pcligne);
 }
 
 unsigned int CGrapheChargeurFichier::GCFtrouverCle(char const * const pccleCherchee, unsigned int uiindexMin)
