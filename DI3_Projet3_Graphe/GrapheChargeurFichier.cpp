@@ -46,7 +46,7 @@ void CGrapheChargeurFichier::GCFchargeFichier(char const * const chemin)
 		cerr << "Impossible d'ouvrir le fichier " << chemin << " !" << endl;
 }
 
-unsigned int CGrapheChargeurFichier::GCFtrouverCle(char * pccleCherchee, unsigned int uiindexMin)
+unsigned int CGrapheChargeurFichier::GCFtrouverCle(char const * const pccleCherchee, unsigned int uiindexMin)
 {
 	//Chercher valeur en param dans le tableau cle
 	//Renvoyer indice si trouvé
@@ -58,7 +58,7 @@ unsigned int CGrapheChargeurFichier::GCFtrouverCle(char * pccleCherchee, unsigne
     return -1;
 }
 
-char * CGrapheChargeurFichier::GCFtrouverValeur(unsigned int uiindice)
+char const * const CGrapheChargeurFichier::GCFtrouverValeur(unsigned int uiindice)
 {
 	//Renvoyer la valeur correspondante a la cle du tableau valeur
 	return ppcGCFvaleur[uiindice];
@@ -73,7 +73,7 @@ void CGrapheChargeurFichier::GCFafficherTabs()
     }
 }
 
-void CGrapheChargeurFichier::GCFajouterCouple(char * cleParam, char * valeurParam)
+void CGrapheChargeurFichier::GCFajouterCouple(char const * const cleParam, char const * const valeurParam)
 {
 	uiGCFargc++;
 
@@ -90,7 +90,7 @@ void CGrapheChargeurFichier::GCFajouterCouple(char * cleParam, char * valeurPara
     ppcGCFvaleur[uiGCFargc-1] = _strdup(valeurParam);
 }
 
-void CGrapheChargeurFichier::GCFseparerMembres(char * chaine)
+void CGrapheChargeurFichier::GCFseparerMembres(char * const chaine)
 {
     int iindexEgal, iindexVirgule;
 	iindexVirgule = CMyString::MSTtrouverChar(chaine, ',');

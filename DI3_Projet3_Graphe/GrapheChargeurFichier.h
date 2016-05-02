@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+//TODO: Renommer en CParserFichier
+
 class CGrapheChargeurFichier
 {
 private:
@@ -15,13 +17,13 @@ public:
 	CGrapheChargeurFichier();
 	~CGrapheChargeurFichier();
 	void GCFchargeFichier(char const * const pcchemin);
-	unsigned int GCFtrouverCle(char * pccleCherchee, unsigned int uiindexMin=0);
-	char * GCFtrouverValeur(unsigned int uiindice);
+	unsigned int GCFtrouverCle(char const * const pccleCherchee, unsigned int uiindexMin=0);
+	char const * const GCFtrouverValeur(unsigned int uiindice);
 	void GCFafficherTabs();
 
 private:
-	void GCFajouterCouple(char * pccleParam, char * pcvalue);
-	void GCFseparerMembres(char * pcchaine);
+	void GCFajouterCouple(char const * const pccleParam, char const * const pcvalue);
+	void GCFseparerMembres(char * const pcchaine);
 };
 
 #endif

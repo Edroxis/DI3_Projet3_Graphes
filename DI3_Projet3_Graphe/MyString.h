@@ -1,7 +1,7 @@
 #ifndef MYSTRING_H
 #define MYSTRING_H
 
-//Classe qui fournit des opérations nous permettant de manipuler des strings
+//Classe qui fournit des opérations spéciales nous permettant de manipuler des strings
 class CMyString
 {
 public:
