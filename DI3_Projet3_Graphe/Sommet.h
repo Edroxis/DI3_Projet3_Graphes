@@ -5,24 +5,27 @@
 class CSommet
 {
 private:
-    unsigned int numero;
-	unsigned int uinbArrivant;
-	unsigned int uinbPartant;
-	CArc ** ppARCarrivant;
-	CArc ** ppARCpartant;
+    unsigned int uiSMTnumero;
+	unsigned int uiSMTnbArrivant;
+	unsigned int uiSMTnbPartant;
+	CArc ** ppARCSMTarrivant;
+	CArc ** ppARCSMTpartant;
 
 public:
 	CSommet(const CSommet& SMTparam);
-	CSommet(unsigned int numero);
+	CSommet(unsigned int uiParam);
 	~CSommet(void);
 
 public:
-	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
+	unsigned int SMTgetNumero();
 	CArc const * const * SMTgetPartant() const;
 	CArc const * const * SMTgetArrivant() const;
+	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
+	static void SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 	unsigned int SMTgetNbArrivant() const;
 	unsigned int SMTgetNbPartant() const;
-
+    //TODO fonction pour inverser arcs
+    //TODO fonction pour afficher sommet
 
 private:
 	void SMTajouterArcPartant(CSommet& SMTdest);

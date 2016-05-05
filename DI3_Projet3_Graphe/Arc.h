@@ -6,7 +6,7 @@ class CSommet;
 class CArc
 {
 private:
-	CSommet * pSMTdest;
+	CSommet * pSMTARCdest;
 
 public:
 	CArc(CSommet& SMTparam);

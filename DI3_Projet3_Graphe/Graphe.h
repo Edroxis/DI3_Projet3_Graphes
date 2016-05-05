@@ -6,20 +6,19 @@
 class CGraphe
 {
 private:
-	CSommet ** ppSMTliste;
+	CSommet ** ppSMTGPHliste;
 	unsigned int uiGPHtotalSommet;
-	unsigned int uiGPHtotalArc;
 
 public:
 	CGraphe();
 	CGraphe(char const * const chemin);
 	~CGraphe();
 
-	void GPHajouterSommet(CSommet& SMTparam);
+	void GPHajouterSommet(CSommet* SMTparam);
 	void GPHsupprimerSommet(CSommet& SMTparam);
-	CSommet& GPHgetSommet(int inumero);
+	CSommet& GPHgetSommet(unsigned int inumero);
 	unsigned int GPHgetTotalSommet() const;
-	unsigned int GPHgetTotalArc();
+    //TODO fonction pour afficher graphe
 };
 
 inline unsigned int CGraphe::GPHgetTotalSommet() const
