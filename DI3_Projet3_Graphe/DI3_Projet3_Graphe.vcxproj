@@ -83,6 +83,7 @@
     <ClCompile Include="GrapheChargeurFichier.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Sommet.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arc.h" />
@@ -91,6 +92,7 @@
     <ClInclude Include="GrapheChargeurFichier.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Sommet.h" />
+    <ClInclude Include="UnitTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

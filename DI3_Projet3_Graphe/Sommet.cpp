@@ -1,9 +1,10 @@
 #include "Sommet.h"
 #include <stdlib.h>
+#include <cassert>
 
 CSommet::CSommet(const CSommet& SMTparam)
 {
-    //Necessaire? cf tous les passages de CSommet se font par reference
+	assert(false && "The fact to copy a CSommet is bad idea!");
 }
 
 CSommet::CSommet(unsigned int uiParam){
@@ -73,19 +74,23 @@ void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest){
 
     uiSMTnbPartant--;
 
-    for(uiboucle = 0; uiboucle < uiSMTnbPartant && SMTdest.SMTgetNumero() != ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
+    for(uiboucle = 0; uiboucle < uiSMTnbPartant &&
+		SMTdest.SMTgetNumero() != ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
+
     for(; uiboucle < uiSMTnbPartant/*-1*/; uiboucle++)
         ppARCSMTpartant[uiboucle] = ppARCSMTpartant[uiboucle+1];
 
     ppARCSMTpartant = (CArc **) realloc(ppARCSMTpartant, uiSMTnbPartant * sizeof(CArc*));
 }
 
-void CSommet::SMTsupprimerArcArrivant(CSommet& SMTdest){
+void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc){
     unsigned int uiboucle;
 
     uiSMTnbArrivant--;
 
-    for(uiboucle = 0; uiboucle < uiSMTnbArrivant && SMTdest.SMTgetNumero() != ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
+    for(uiboucle = 0; uiboucle < uiSMTnbArrivant &&
+		SMTsrc.SMTgetNumero() != ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
+
     for(; uiboucle < uiSMTnbArrivant/*-1*/; uiboucle++)
         ppARCSMTarrivant[uiboucle] = ppARCSMTarrivant[uiboucle+1];
 

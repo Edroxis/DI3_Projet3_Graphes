@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SOMMET_H
+#define SOMMET_H
 
 #include "Arc.h"
 
@@ -14,7 +15,7 @@ private:
 public:
 	CSommet(const CSommet& SMTparam);
 	CSommet(unsigned int uiParam);
-	~CSommet(void);
+	~CSommet();
 
 public:
 	unsigned int SMTgetNumero();
@@ -34,3 +35,4 @@ private:
 	void SMTsupprimerArcArrivant(CSommet& SMTdest);
 };
 
+#endif

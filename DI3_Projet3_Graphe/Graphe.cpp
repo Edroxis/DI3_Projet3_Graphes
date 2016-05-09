@@ -1,6 +1,7 @@
 #include "Graphe.h"
 #include "GrapheChargeurFichier.h"
 #include <stdlib.h>
+#include "Cexception.h"
 
 CGraphe::CGraphe()
 {
@@ -28,11 +29,13 @@ CGraphe::CGraphe(char const * const chemin)
 
 CGraphe::~CGraphe()
 {
+	free(ppSMTGPHliste);
 }
 
 void CGraphe::GPHajouterSommet(CSommet* SMTparam)
 {
-    //TODO exception si sommet existe déjà
+	if(GPHexistantSommet(SMTparam->SMTgetNumero()))
+		throw Cexception(EXCEPTION_SOMMET_EXISTANT);
 
     uiGPHtotalSommet++;
 
@@ -40,25 +43,48 @@ void CGraphe::GPHajouterSommet(CSommet* SMTparam)
     ppSMTGPHliste[uiGPHtotalSommet-1] = SMTparam;
 }
 
-void CGraphe::GPHsupprimerSommet(CSommet& SMTparam){
+void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
+{
     unsigned int uiboucle;
 
     //TODO supp arcs partant et arrivant de SMTparam
 
-    for(uiboucle = 0; uiboucle < uiGPHtotalSommet && SMTparam.SMTgetNumero() != ppSMTGPHliste[uiboucle]->SMTgetNumero(); uiboucle++);
-    for(; uiboucle < uiGPHtotalSommet/*-1*/; uiboucle++)
+	/* On incrémente uiboucle tant que le sommet n'est pas trouvé,
+	dès qu'il est trouvé uiboucle fait référence à l'index du sommet */
+    for(uiboucle = 0; uiboucle < uiGPHtotalSommet &&
+		SMTparam.SMTgetNumero() != ppSMTGPHliste[uiboucle]->SMTgetNumero(); uiboucle++);
+
+	if(uiboucle == uiGPHtotalSommet)
+		throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
+
+	//TODO: A virer si CGraphe ne gère pas la durée de vie nos CSommet
+	//delete ppSMTGPHliste[uiboucle];
+
+    for(; uiboucle < uiGPHtotalSommet - 1; uiboucle++)
         ppSMTGPHliste[uiboucle] = ppSMTGPHliste[uiboucle+1];
+
+	uiGPHtotalSommet--;
     ppSMTGPHliste = (CSommet **) realloc(ppSMTGPHliste, uiGPHtotalSommet * sizeof(CSommet *));
-    SMTparam.~CSommet();
 }
 
-CSommet& CGraphe::GPHgetSommet(unsigned int inumero){
+bool CGraphe::GPHexistantSommet(unsigned int inumero) const
+{
+	unsigned int uiboucle;
+
+	for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
+		if(ppSMTGPHliste[uiboucle]->SMTgetNumero() == inumero)
+			return true;
+
+	return false;
+}
+
+CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
+{
     unsigned int uiboucle;
-    CSommet SMTnull = NULL;
 
     for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
         if(ppSMTGPHliste[uiboucle]->SMTgetNumero() == inumero)
             return *ppSMTGPHliste[uiboucle];
 
-    return SMTnull;
+    throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
 }

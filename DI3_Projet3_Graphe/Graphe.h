@@ -3,6 +3,9 @@
 
 #include "Sommet.h"
 
+#define EXCEPTION_SOMMET_INTROUVABLE 1
+#define EXCEPTION_SOMMET_EXISTANT 2
+
 class CGraphe
 {
 private:
@@ -16,6 +19,7 @@ public:
 
 	void GPHajouterSommet(CSommet* SMTparam);
 	void GPHsupprimerSommet(CSommet& SMTparam);
+	bool GPHexistantSommet(unsigned int inumero) const;
 	CSommet& GPHgetSommet(unsigned int inumero);
 	unsigned int GPHgetTotalSommet() const;
     //TODO fonction pour afficher graphe
