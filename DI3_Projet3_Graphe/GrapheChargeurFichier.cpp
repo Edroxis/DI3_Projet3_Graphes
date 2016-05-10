@@ -84,13 +84,13 @@ void CGrapheChargeurFichier::GCFajouterCouple(char const * const cleParam, char 
 		//réallouer cle par realloc
     ppcGCFcle = (char **) realloc(ppcGCFcle, uiGCFargc * sizeof(char*));
 		//cle alloué par new
-    ppcGCFcle[uiGCFargc-1] = strdup(cleParam);
+    ppcGCFcle[uiGCFargc-1] = _strdup(cleParam);
 
 	//Ajouter valeur au tableau valeur
         //réallouer valeur par realloc
     ppcGCFvaleur = (char **) realloc(ppcGCFvaleur, uiGCFargc * sizeof(char*));
 		//valeur alloué par new
-    ppcGCFvaleur[uiGCFargc-1] = strdup(valeurParam);
+    ppcGCFvaleur[uiGCFargc-1] = _strdup(valeurParam);
 }
 
 void CGrapheChargeurFichier::GCFseparerMembres(char * const chaine)

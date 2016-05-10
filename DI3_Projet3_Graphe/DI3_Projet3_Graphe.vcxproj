@@ -81,6 +81,7 @@
     <ClCompile Include="DI3_Projet3_Graphe.cpp" />
     <ClCompile Include="Graphe.cpp" />
     <ClCompile Include="GrapheChargeurFichier.cpp" />
+    <ClCompile Include="GrapheOperation.cpp" />
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Sommet.cpp" />
     <ClCompile Include="UnitTest.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Cexception.h" />
     <ClInclude Include="Graphe.h" />
     <ClInclude Include="GrapheChargeurFichier.h" />
+    <ClInclude Include="GrapheOperation.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Sommet.h" />
     <ClInclude Include="UnitTest.h" />

@@ -1,6 +1,7 @@
-#pragma once
+#ifndef ARC_H
+#define ARC_H
 
-//Déclaration anticipée pour éviter une dépendance cyclique
+//Déclaration anticipée pour éviter une dépendance circulaire
 class CSommet;
 
 class CArc
@@ -12,7 +13,7 @@ public:
 	CArc(CSommet& SMTparam);
 	~CArc(void);
 
-public:
-	CSommet& ARCgetDest();
+	CSommet& ARCgetDest() const;
 };
 
+#endif

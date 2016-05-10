@@ -13,6 +13,16 @@ private:
 	void test_GPH_existantSommet();
 	void test_GPH_ajouterSommet();
 	void test_GPH_supprimerSommet();
+
+	void test_SMT_constructor();
+	void test_SMT_getNumero();
+	void test_SMT_getPartant();
+	void test_SMT_getArrivant();
+	void test_SMT_supprimerArc();
+	void test_SMT_getNbArrivant();
+	void test_SMT_getNbPartant();
+
+	void test_ARC();
 };
 
 #endif

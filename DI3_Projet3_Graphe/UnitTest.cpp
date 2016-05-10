@@ -1,6 +1,7 @@
 #include "UnitTest.h"
 #include "Graphe.h"
 #include "Cexception.h"
+#include "Arc.h"
 #include <cassert>
 
 CUnitTest::CUnitTest()
@@ -14,6 +15,16 @@ void CUnitTest::run()
 	test_GPH_existantSommet();
 	test_GPH_ajouterSommet();
 	test_GPH_supprimerSommet();
+
+	test_SMT_constructor();
+	test_SMT_getNumero();
+	test_SMT_getPartant();
+	//test_SMT_getArrivant();
+	test_SMT_supprimerArc();
+	test_SMT_getNbArrivant();
+	test_SMT_getNbPartant();
+
+	test_ARC();
 }
 
 void CUnitTest::test_GPH_getTotalSommet()
@@ -144,4 +155,115 @@ void CUnitTest::test_GPH_supprimerSommet()
 	{
 		assert(e.EXClire_valeur() == EXCEPTION_SOMMET_INTROUVABLE);
 	}
+}
+
+
+void CUnitTest::test_SMT_constructor()
+{
+	// On test déjà le constructeur à chaque tests unitaire
+	// TODO: Eclaircir point avec le constructeur de recopie */
+}
+
+void CUnitTest::test_SMT_getNumero()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(1);
+	CSommet monSommet3(8);
+
+	assert(monSommet1.SMTgetNumero() == 1);
+	assert(monSommet2.SMTgetNumero() == 1);
+	assert(monSommet3.SMTgetNumero() == 8);
+}
+
+void CUnitTest::test_SMT_getPartant()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(1);
+	CSommet monSommet3(2);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet2);
+	CSommet::SMTajouterArc(monSommet1, monSommet3);
+	
+	CArc const * const * arcPartants = monSommet1.SMTgetPartant();
+
+	assert(&arcPartants[0]->ARCgetDest() == &monSommet2);
+	assert(&arcPartants[1]->ARCgetDest() == &monSommet3);
+}
+
+void CUnitTest::test_SMT_getArrivant()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(2);
+	CSommet monSommet3(3);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet3);
+	CSommet::SMTajouterArc(monSommet2, monSommet3);
+	
+	CArc const * const * arcArivants = monSommet3.SMTgetArrivant();
+	//TODO: Comment revenir à l'origine des sommets ?
+}
+
+void CUnitTest::test_SMT_supprimerArc()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(2);
+	CSommet monSommet3(3);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet2);
+	CSommet::SMTajouterArc(monSommet1, monSommet3);
+
+	CSommet::SMTsupprimerArc(monSommet1, monSommet2);
+	assert(monSommet1.SMTgetNbPartant() == 1);
+	assert(monSommet1.SMTgetNbArrivant() == 0);
+	assert(monSommet2.SMTgetNbPartant() == 0);
+	assert(monSommet2.SMTgetNbArrivant() == 0);
+	assert(monSommet3.SMTgetNbPartant() == 0);
+	assert(monSommet3.SMTgetNbArrivant() == 1);
+	
+	CArc const * const * arcPartants = monSommet1.SMTgetPartant();
+	assert(&arcPartants[0]->ARCgetDest() == &monSommet3);
+}
+
+void CUnitTest::test_SMT_getNbArrivant()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(2);
+	CSommet monSommet3(3);
+
+	assert(monSommet2.SMTgetNbArrivant() == 0);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet2);
+	assert(monSommet2.SMTgetNbArrivant() == 1);
+
+	CSommet::SMTajouterArc(monSommet3, monSommet2);
+	assert(monSommet2.SMTgetNbArrivant() == 2);
+}
+
+void CUnitTest::test_SMT_getNbPartant()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(2);
+	CSommet monSommet3(3);
+
+	assert(monSommet1.SMTgetNbPartant() == 0);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet2);
+	assert(monSommet1.SMTgetNbPartant() == 1);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet3);
+	assert(monSommet1.SMTgetNbPartant() == 2);
+}
+
+
+void CUnitTest::test_ARC()
+{
+	CSommet monSommetDestination(2);
+
+	//Test constructeur et du get
+	CArc monArc(monSommetDestination);
+	assert(&monArc.ARCgetDest() == &monSommetDestination);
+
+	//Test constructeur de recopie
+	CArc monArcCopie(monArc);
+	assert(&monArcCopie.ARCgetDest() == &monArc.ARCgetDest());
 }

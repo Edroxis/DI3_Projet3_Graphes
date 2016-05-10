@@ -18,11 +18,12 @@ public:
 	~CSommet();
 
 public:
+	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
+	static void SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant);
+
 	unsigned int SMTgetNumero();
 	CArc const * const * SMTgetPartant() const;
 	CArc const * const * SMTgetArrivant() const;
-	static void SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant);
-	static void SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 	unsigned int SMTgetNbArrivant() const;
 	unsigned int SMTgetNbPartant() const;
     void SMTprintSommet();

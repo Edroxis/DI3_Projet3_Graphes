@@ -7,6 +7,10 @@ using namespace std;
 
 CSommet::CSommet(const CSommet& SMTparam)
 {
+	/* TODO: Meme traitement pour l'opérateur = ?
+	Est-ce vraiment nécessaire d'empêcher la copie, le problème se pose que quand
+	2 sommets avec le meme numero sont dans un graphe mais CGraphe gère déjà
+	cette problématique */
 	assert(false && "Don't copy a CSommet, it's bad idea, you may burn in hell!");
 }
 
@@ -51,6 +55,10 @@ unsigned int CSommet::SMTgetNbPartant() const{
 }
 
 void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant){
+	/* TODO: Doit-on autoriser l'ajout d'un arc déjà existant entre les 2 sommets ?
+	En cas de refus, test unitaire ! */
+	/* TODO: De même doit-on autoriser la création d'un arc entre un même sommet ? */
+
     SMTpartant.SMTajouterArcPartant(SMTarrivant);
     SMTarrivant.SMTajouterArcArrivant(SMTpartant);
 }

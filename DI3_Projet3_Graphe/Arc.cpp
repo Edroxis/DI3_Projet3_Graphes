@@ -7,10 +7,11 @@ CArc::CArc(CSommet& SMTparam)
 }
 
 
-CArc::~CArc(void)
+CArc::~CArc()
 {
 }
 
-CSommet& CArc::ARCgetDest(){
+CSommet& CArc::ARCgetDest() const
+{
     return *pSMTARCdest;
 }
