@@ -25,8 +25,8 @@ public:
 	static void SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 	unsigned int SMTgetNbArrivant() const;
 	unsigned int SMTgetNbPartant() const;
+    void SMTprintSommet();
     //TODO fonction pour inverser arcs
-    //TODO fonction pour afficher sommet
 
 private:
 	void SMTajouterArcPartant(CSommet& SMTdest);

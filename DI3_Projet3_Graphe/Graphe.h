@@ -22,7 +22,7 @@ public:
 	bool GPHexistantSommet(unsigned int inumero) const;
 	CSommet& GPHgetSommet(unsigned int inumero);
 	unsigned int GPHgetTotalSommet() const;
-    //TODO fonction pour afficher graphe
+    void GPHprintGraphe();
 };
 
 inline unsigned int CGraphe::GPHgetTotalSommet() const

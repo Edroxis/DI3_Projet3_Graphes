@@ -1,7 +1,10 @@
 #include "Graphe.h"
 #include "GrapheChargeurFichier.h"
 #include <stdlib.h>
+#include <iostream>
 #include "Cexception.h"
+
+using namespace std;
 
 CGraphe::CGraphe()
 {
@@ -87,4 +90,14 @@ CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
             return *ppSMTGPHliste[uiboucle];
 
     throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
+}
+
+
+void CGraphe::GPHprintGraphe(){
+    unsigned int uiboucle;
+    for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
+    {
+        ppSMTGPHliste[uiboucle]->SMTprintSommet();
+        cout << endl;
+    }
 }

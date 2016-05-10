@@ -1,10 +1,13 @@
+#include <iostream>
 #include "Sommet.h"
 #include <stdlib.h>
 #include <cassert>
 
+using namespace std;
+
 CSommet::CSommet(const CSommet& SMTparam)
 {
-	assert(false && "The fact to copy a CSommet is bad idea!");
+	assert(false && "Don't copy a CSommet, it's bad idea, you may burn in hell!");
 }
 
 CSommet::CSommet(unsigned int uiParam){
@@ -55,6 +58,15 @@ void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant){
 void CSommet::SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant){
     SMTpartant.SMTsupprimerArcPartant(SMTarrivant);
     SMTarrivant.SMTsupprimerArcArrivant(SMTpartant);
+}
+
+void CSommet::SMTprintSommet(){
+    unsigned int uiboucle;
+    for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)
+        cout << uiSMTnumero << "->" << ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
+
+    for(uiboucle = 0; uiboucle < uiSMTnbArrivant; uiboucle++)
+        cout << uiSMTnumero << "<-" << ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
 }
 
 void CSommet::SMTajouterArcPartant(CSommet& SMTdest){

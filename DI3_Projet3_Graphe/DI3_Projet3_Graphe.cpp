@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     CSommet::SMTajouterArc(*som2, *som3);
     CSommet::SMTajouterArc(*som3, *som1);
 
-    //cout << grph.GPHgetSommet(1).SMTgetNumero();
+    //grph.GPHprintGraphe();
 
     CSommet::SMTsupprimerArc(*som1, *som2);
     CSommet::SMTsupprimerArc(*som2, *som3);
