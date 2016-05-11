@@ -24,7 +24,7 @@ public:
 	static void SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant);
 	static CArc const * const SMTgetArc(const CSommet& SMTpartant, const CSommet& SMTarrivant);
 
-	unsigned int SMTgetNumero();
+	unsigned int SMTgetNumero() const;
 	CArc const * const * SMTgetPartant() const;
 	CArc const * const * SMTgetArrivant() const;
 	unsigned int SMTgetNbArrivant() const;

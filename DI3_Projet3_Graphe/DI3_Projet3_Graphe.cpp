@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GrapheChargeurFichier.h"
+#include "GrapheOperation.h"
 #include "Graphe.h"
 #include "Cexception.h"
 #include "UnitTest.h"
@@ -15,7 +16,7 @@ int main(int argc, char* argv[])
 	test.GCFchargeFichier("graphe1.txt");
 	test.GCFafficherTabs();*/
 
-	CGraphe grph;
+	CGraphe grph, *grph2;
 
 	CSommet* som1 = new CSommet(1);
 	CSommet* som2 = new CSommet(2);
@@ -30,6 +31,8 @@ int main(int argc, char* argv[])
     CSommet::SMTajouterArc(*som3, *som1);
 
     //grph.GPHprintGraphe();
+	grph2 = CGrapheOperation::GOPinverserGraphe(grph);
+	grph2->GPHprintGraphe();
 
     CSommet::SMTsupprimerArc(*som1, *som2);
     CSommet::SMTsupprimerArc(*som2, *som3);
@@ -46,8 +49,8 @@ int main(int argc, char* argv[])
 		cout << "Un des sommets n'a pas été trouvé" << endl;
 	}
 
-	/*int e;
-	scanf_s("%d",&e);*/
+	int e;
+	scanf_s("%d",&e);
 	return 0;
 }
 

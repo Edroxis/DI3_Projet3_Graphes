@@ -3,5 +3,5 @@
 class CGrapheOperation
 {
 public:
-    static CGraphe& GOPinverserGraphe(CGraphe& GPHparam);
+    static CGraphe* GOPinverserGraphe(CGraphe& GPHparam);
 };

@@ -33,7 +33,7 @@ CSommet::~CSommet(void)
         delete ppARCSMTpartant[uiboucle];
 }
 
-unsigned int CSommet::SMTgetNumero(){
+unsigned int CSommet::SMTgetNumero() const{
     return uiSMTnumero;
 }
 

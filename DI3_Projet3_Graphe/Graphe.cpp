@@ -78,6 +78,10 @@ bool CGraphe::GPHexistantSommet(unsigned int inumero) const
 	return false;
 }
 
+CSommet const * const * const CGraphe::GPHgetListeSommet() const{
+	return ppSMTGPHliste;
+}
+
 CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
 {
     unsigned int uiboucle;

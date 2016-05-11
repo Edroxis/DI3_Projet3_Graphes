@@ -2,6 +2,7 @@
 #define GRAPHE_H
 
 #include "Sommet.h"
+#include <iostream>
 
 #define EXCEPTION_SOMMET_INTROUVABLE 1
 #define EXCEPTION_SOMMET_EXISTANT 2
@@ -21,6 +22,7 @@ public:
 	void GPHsupprimerSommet(CSommet& SMTparam);
 	bool GPHexistantSommet(unsigned int inumero) const;
 	CSommet& GPHgetSommet(unsigned int inumero);
+	CSommet const * const * const GPHgetListeSommet() const;
 	unsigned int GPHgetTotalSommet() const;
     void GPHprintGraphe();
 };
