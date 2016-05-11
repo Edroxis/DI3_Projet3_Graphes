@@ -60,9 +60,6 @@ void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
 	if(uiboucle == uiGPHtotalSommet)
 		throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
 
-	//TODO: A virer si CGraphe ne gère pas la durée de vie nos CSommet
-	//delete ppSMTGPHliste[uiboucle];
-
     for(; uiboucle < uiGPHtotalSommet - 1; uiboucle++)
         ppSMTGPHliste[uiboucle] = ppSMTGPHliste[uiboucle+1];
 

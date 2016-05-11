@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Sommet.h"
+#include "Cexception.h"
 #include <stdlib.h>
 #include <cassert>
 
@@ -7,14 +8,12 @@ using namespace std;
 
 CSommet::CSommet(const CSommet& SMTparam)
 {
-	/* TODO: Meme traitement pour l'opérateur = ?
-	Est-ce vraiment nécessaire d'empêcher la copie, le problème se pose que quand
-	2 sommets avec le meme numero sont dans un graphe mais CGraphe gère déjà
-	cette problématique */
-	assert(false && "Don't copy a CSommet, it's bad idea, you may burn in hell!");
+	//On ne souhaite pas de copie pour maintenir la cohérence pour les arcs
+	assert(false && "Don't copy a CSommet, it's a bad idea, you may burn in hell!");
 }
 
-CSommet::CSommet(unsigned int uiParam){
+CSommet::CSommet(unsigned int uiParam)
+{
     uiSMTnumero = uiParam;
     uiSMTnbArrivant = 0;
 	uiSMTnbPartant = 0;
@@ -38,37 +37,55 @@ unsigned int CSommet::SMTgetNumero(){
     return uiSMTnumero;
 }
 
-CArc const * const * CSommet::SMTgetPartant() const{
+CArc const * const * CSommet::SMTgetPartant() const
+{
     return ppARCSMTpartant;
 }
 
-CArc const * const * CSommet::SMTgetArrivant() const{
+CArc const * const * CSommet::SMTgetArrivant() const
+{
     return ppARCSMTarrivant;
 }
 
-unsigned int CSommet::SMTgetNbArrivant() const{
+unsigned int CSommet::SMTgetNbArrivant() const
+{
     return uiSMTnbArrivant;
 }
 
-unsigned int CSommet::SMTgetNbPartant() const{
+unsigned int CSommet::SMTgetNbPartant() const
+{
     return uiSMTnbPartant;
 }
 
-void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant){
-	/* TODO: Doit-on autoriser l'ajout d'un arc déjà existant entre les 2 sommets ?
-	En cas de refus, test unitaire ! */
-	/* TODO: De même doit-on autoriser la création d'un arc entre un même sommet ? */
+void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant)
+{
+	if(SMTgetArc(SMTpartant, SMTarrivant) != 0)
+		throw Cexception(EXCEPTION_ARC_EXISTANT);
 
     SMTpartant.SMTajouterArcPartant(SMTarrivant);
     SMTarrivant.SMTajouterArcArrivant(SMTpartant);
 }
 
-void CSommet::SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant){
+void CSommet::SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant)
+{
     SMTpartant.SMTsupprimerArcPartant(SMTarrivant);
     SMTarrivant.SMTsupprimerArcArrivant(SMTpartant);
 }
 
-void CSommet::SMTprintSommet(){
+CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& SMTarrivant)
+{
+	for(unsigned int uiIndexArc = 0; uiIndexArc < SMTpartant.SMTgetNbPartant(); uiIndexArc++)
+	{
+		CArc const * const testedArc = SMTpartant.ppARCSMTpartant[uiIndexArc];
+		if(&testedArc->ARCgetDest() == &SMTarrivant)
+			return testedArc;
+	}
+
+	return 0;
+}
+
+void CSommet::SMTprintSommet()
+{
     unsigned int uiboucle;
     for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)
         cout << uiSMTnumero << "->" << ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
@@ -77,19 +94,22 @@ void CSommet::SMTprintSommet(){
         cout << uiSMTnumero << "<-" << ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
 }
 
-void CSommet::SMTajouterArcPartant(CSommet& SMTdest){
+void CSommet::SMTajouterArcPartant(CSommet& SMTdest)
+{
     uiSMTnbPartant++;
     ppARCSMTpartant = (CArc **) realloc(ppARCSMTpartant, uiSMTnbPartant * sizeof (CArc *));
     ppARCSMTpartant[uiSMTnbPartant-1] = new CArc(SMTdest);
 }
 
-void CSommet::SMTajouterArcArrivant(CSommet& SMTdest){
+void CSommet::SMTajouterArcArrivant(CSommet& SMTdest)
+{
     uiSMTnbArrivant++;
     ppARCSMTarrivant = (CArc **) realloc(ppARCSMTarrivant, uiSMTnbArrivant * sizeof (CArc *));
     ppARCSMTarrivant[uiSMTnbArrivant-1] = new CArc(SMTdest);
 }
 
-void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest){
+void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest)
+{
     unsigned int uiboucle;
 
     uiSMTnbPartant--;
@@ -103,7 +123,8 @@ void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest){
     ppARCSMTpartant = (CArc **) realloc(ppARCSMTpartant, uiSMTnbPartant * sizeof(CArc*));
 }
 
-void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc){
+void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc)
+{
     unsigned int uiboucle;
 
     uiSMTnbArrivant--;
@@ -115,4 +136,10 @@ void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc){
         ppARCSMTarrivant[uiboucle] = ppARCSMTarrivant[uiboucle+1];
 
     ppARCSMTarrivant = (CArc **) realloc(ppARCSMTarrivant, uiSMTnbArrivant * sizeof(CArc*));
+}
+
+void CSommet::operator=(const CSommet& SMTparam)
+{
+	//On ne souhaite pas de copie pour maintenir la cohérence pour les arcs
+	assert(false && "Don't copy a CSommet, it's a bad idea, you may burn in hell!");
 }

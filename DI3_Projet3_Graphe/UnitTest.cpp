@@ -16,11 +16,12 @@ void CUnitTest::run()
 	test_GPH_ajouterSommet();
 	test_GPH_supprimerSommet();
 
-	test_SMT_constructor();
 	test_SMT_getNumero();
 	test_SMT_getPartant();
-	//test_SMT_getArrivant();
+	test_SMT_getArrivant();
+	test_SMT_ajouterArc();
 	test_SMT_supprimerArc();
+	test_SMT_getArc();
 	test_SMT_getNbArrivant();
 	test_SMT_getNbPartant();
 
@@ -158,12 +159,6 @@ void CUnitTest::test_GPH_supprimerSommet()
 }
 
 
-void CUnitTest::test_SMT_constructor()
-{
-	// On test déjà le constructeur à chaque tests unitaire
-	// TODO: Eclaircir point avec le constructeur de recopie */
-}
-
 void CUnitTest::test_SMT_getNumero()
 {
 	CSommet monSommet1(1);
@@ -199,8 +194,38 @@ void CUnitTest::test_SMT_getArrivant()
 	CSommet::SMTajouterArc(monSommet1, monSommet3);
 	CSommet::SMTajouterArc(monSommet2, monSommet3);
 	
-	CArc const * const * arcArivants = monSommet3.SMTgetArrivant();
-	//TODO: Comment revenir à l'origine des sommets ?
+	CArc const * const * arcArrivants = monSommet3.SMTgetArrivant();
+	assert(&arcArrivants[0]->ARCgetDest() == &monSommet1);
+	assert(&arcArrivants[1]->ARCgetDest() == &monSommet2);
+}
+
+void CUnitTest::test_SMT_ajouterArc()
+{
+	CSommet sommet1(1);
+	CSommet sommet2(2);
+
+	try
+	{
+		CSommet::SMTajouterArc(sommet1, sommet1);
+		assert(sommet1.SMTgetNbArrivant() == 1);
+		assert(sommet1.SMTgetNbPartant() == 1);
+	}
+	catch(...)
+	{
+		assert(false && "On doit pouvoir ajouter des arcs réflexifs.");
+	}
+	
+	CSommet::SMTajouterArc(sommet1, sommet2);
+
+	try
+	{
+		CSommet::SMTajouterArc(sommet1, sommet2);
+		assert(false && "On n'est pas censé ajouter 2x le même arc entre 2 mêmes sommets");
+	}
+	catch(Cexception& e)
+	{
+		assert(e.EXClire_valeur() == EXCEPTION_ARC_EXISTANT);
+	}
 }
 
 void CUnitTest::test_SMT_supprimerArc()
@@ -222,6 +247,19 @@ void CUnitTest::test_SMT_supprimerArc()
 	
 	CArc const * const * arcPartants = monSommet1.SMTgetPartant();
 	assert(&arcPartants[0]->ARCgetDest() == &monSommet3);
+}
+
+void CUnitTest::test_SMT_getArc()
+{
+	CSommet monSommet1(1);
+	CSommet monSommet2(2);
+
+	CSommet::SMTajouterArc(monSommet1, monSommet2);
+	assert(&CSommet::SMTgetArc(monSommet1, monSommet2)->ARCgetDest() ==
+		&monSommet2);
+
+	//On test si getArc() nous retourne bien 0 si l'arc n'existe pas
+	assert(CSommet::SMTgetArc(monSommet1, monSommet1) == 0);
 }
 
 void CUnitTest::test_SMT_getNbArrivant()

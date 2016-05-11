@@ -1,6 +1,7 @@
 #include "Graphe.h"
 
-class CGrapheOperation{
+class CGrapheOperation
+{
 public:
     static CGraphe& GOPinverserGraphe(CGraphe& GPHparam);
 };
