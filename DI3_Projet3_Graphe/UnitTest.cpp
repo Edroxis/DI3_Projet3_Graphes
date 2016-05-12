@@ -15,6 +15,13 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de Test des fonctions
+***************************************************
+Corps de la classe CUnitTest.
+Permet de tester nos classes et leurs fonctions.
+**************************************************/
+
 #include "UnitTest.h"
 #include "Graphe.h"
 #include "Cexception.h"

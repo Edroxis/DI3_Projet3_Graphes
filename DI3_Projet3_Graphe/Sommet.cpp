@@ -15,6 +15,16 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de Gestion des CSommet
+***************************************************
+Corps de la classe CSommet.
+Permet de créer, détruire, un sommet et obtenir son numéro, 
+ajouter, supprimer un Arc, obtenir la liste des arcs 
+arrivant et partant ainsi que leur nombre et afficher
+sur la console la structure du sommet courant.
+**************************************************/
+
 #include <iostream>
 #include "Sommet.h"
 #include "Cexception.h"

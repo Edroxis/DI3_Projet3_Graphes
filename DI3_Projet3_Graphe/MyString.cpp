@@ -15,6 +15,14 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de gestion de char*
+***************************************************
+Corps de la classe CMyString.
+Permet de réaliser des opérations spécifiques sur les
+char*.
+**************************************************/
+
 #include "MyString.h"
 #include <string.h>
 
