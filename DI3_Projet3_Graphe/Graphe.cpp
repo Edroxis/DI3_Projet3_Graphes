@@ -119,10 +119,17 @@ void CGraphe::GPHajouterSommet(CSommet* SMTparam)
 * ************************************************/
 void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
 {
+	//On supprime les arcs partant de ce sommet
+	const CArc* const * arcPartants = SMTparam.SMTgetPartant();
+	for(unsigned int uiArc = 0; uiArc < SMTparam.SMTgetNbPartant(); uiArc++)
+		CSommet::SMTsupprimerArc(SMTparam, arcPartants[uiArc]->ARCgetDest());
+
+	//Puis les arcs arrivants à ce sommet
+	const CArc* const * arcArrivants = SMTparam.SMTgetArrivant();
+	for(unsigned int uiArc = 0; uiArc < SMTparam.SMTgetNbArrivant(); uiArc++)
+		CSommet::SMTsupprimerArc(arcArrivants[uiArc]->ARCgetDest(), SMTparam);
+
     unsigned int uiboucle;
-
-    //TODO supp arcs partant et arrivant de SMTparam
-
 	/* On incrémente uiboucle tant que le sommet n'est pas trouvé,
 	dès qu'il est trouvé uiboucle fait référence à l'index du sommet */
     for(uiboucle = 0; uiboucle < uiGPHtotalSommet &&

@@ -20,7 +20,6 @@
 
 #include "ObjetRemplisseur.h"
 
-//TODO: Vérifier valeurs exceptions
 #define EXCEPTION_UNABLE_TO_OPEN_FILE 4 
 #define EXCEPTION_UNABLE_TO_PARSE_FILE 5
 

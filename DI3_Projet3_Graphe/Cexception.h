@@ -93,7 +93,7 @@ public:
 * Sortie : valeur de l'exception
 * Post-condition : valeur de l'exception retournée
 * ************************************************/
-	unsigned int EXClire_valeur();
+	unsigned int EXClire_valeur() const;
 };
 
 /**************************************************
@@ -121,7 +121,7 @@ inline void Cexception::EXCmodifier_valeur(unsigned int val)
 * Sortie : valeur de l'exception
 * Post-condition : valeur de l'exception retournée
 * ************************************************/
-inline unsigned int Cexception::EXClire_valeur()
+inline unsigned int Cexception::EXClire_valeur() const
 {
 	return uiEXCvaleur;
 }

@@ -127,7 +127,7 @@ void CUnitTest::test_GPH_getSommet()
 	{
 		monGraphe.GPHgetSommet(numeroSommet);
 	}
-	catch(Cexception& e)
+	catch(...)
 	{
 		assert(false && "Le sommet n'a pas été trouvé");
 	}
@@ -241,14 +241,14 @@ void CUnitTest::test_GPH_supprimerSommet()
 		monGraphe.GPHgetSommet(1);
 		assert(false);
 	}
-	catch(Cexception& e) {}
+	catch(...) {}
 
 	try
 	{
 		//Le seul sommet qui n'a pas été supprimé devrait rester accessible
 		monGraphe.GPHgetSommet(2);
 	}
-	catch(Cexception &e)
+	catch(...)
 	{
 		assert(false);
 	}

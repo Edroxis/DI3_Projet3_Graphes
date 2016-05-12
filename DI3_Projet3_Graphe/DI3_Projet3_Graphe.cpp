@@ -19,56 +19,61 @@
 #include "GrapheOperation.h"
 #include "Graphe.h"
 #include "Cexception.h"
+#include "Parseur.h"
 #include "UnitTest.h"
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-	CUnitTest tests;
-	tests.run();
+	#ifdef _DEBUG
+	CUnitTest unitTests;
+	unitTests.run();
+	#endif
 
-	/*CGrapheChargeurFichier test;
-	test.GCFchargeFichier("graphe1.txt");
-	test.GCFafficherTabs();*/
-
-	//TODO: Supprimer ça ?
-
-	CGraphe grph, *grph2;
-
-	CSommet* som1 = new CSommet(1);
-	CSommet* som2 = new CSommet(2);
-	CSommet* som3 = new CSommet(3);
-
-	grph.GPHajouterSommet(som1);
-	grph.GPHajouterSommet(som2);
-	grph.GPHajouterSommet(som3);
-
-    CSommet::SMTajouterArc(*som1, *som2);
-    CSommet::SMTajouterArc(*som2, *som3);
-    CSommet::SMTajouterArc(*som3, *som1);
-
-    //grph.GPHprintGraphe();
-	grph2 = CGrapheOperation::GOPinverserGraphe(grph);
-	grph2->GPHprintGraphe();
-
-    CSommet::SMTsupprimerArc(*som1, *som2);
-    CSommet::SMTsupprimerArc(*som2, *som3);
-    CSommet::SMTsupprimerArc(*som3, *som1);
-
-	try
+	if(argc != 2)
+		cerr << "Veuillez specifier en unique argument l'emplacement du "
+			 << "fichier graphe a ouvrir" << endl;
+	else
 	{
-		grph.GPHsupprimerSommet(grph.GPHgetSommet(1));
-		grph.GPHsupprimerSommet(grph.GPHgetSommet(2));
-		grph.GPHsupprimerSommet(grph.GPHgetSommet(3));
-	}
-	catch(Cexception& e)
-	{
-		cout << "Un des sommets n'a pas été trouvé" << endl;
+		try
+		{
+			CGraphe graphe(argv[1]);
+			cout << "Graphe :" << endl;
+			graphe.GPHprintGraphe();
+
+			CGraphe* grapheInverse = CGrapheOperation::GOPinverserGraphe(graphe);
+			cout << endl << "Graphe inverse :" << endl;
+			grapheInverse->GPHprintGraphe();
+		}
+		catch(const Cexception& e)
+		{
+			switch(e.EXClire_valeur())
+			{
+			case EXCEPTION_SOMMET_INTROUVABLE:
+				cerr << "Sommet introuvable" << endl;
+				break;
+
+			case EXCEPTION_SOMMET_EXISTANT:
+				cerr << "Sommet deja existant" << endl;
+				break;
+
+			case EXCEPTION_ARC_EXISTANT:
+				cerr << "Arc deja existant" << endl;
+				break;
+
+			case EXCEPTION_UNABLE_TO_OPEN_FILE:
+				cerr << "Impossible d'ouvrir le fichier." << endl;
+				break;
+
+			case EXCEPTION_UNABLE_TO_PARSE_FILE:
+				cerr << "Impossible de parser le fichier car il est corrompu." << endl;
+				break;
+			}
+		}
 	}
 
-	int e;
-	scanf_s("%d",&e);
+	system("PAUSE");
 	return 0;
 }
 
