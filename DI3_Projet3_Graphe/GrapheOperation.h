@@ -34,12 +34,13 @@ public:
 /**************************************************
 * GOPinverserGraphe
 * *************************************************
-* 
+* Renvoie un graphe inverse à celui passé en paramètre
 * *************************************************
-* Entrée:
+* Entrée: un graphe
 * Pré-condition :
-* Sortie :
-* Post-condition : 
+* Sortie : un nouveau graphe
+* Post-condition : Création d'un nouveau graphe qui 
+* est l'inverse de celui en paramètre
 * ************************************************/
     static CGraphe* GOPinverserGraphe(CGraphe& GPHparam);
 };

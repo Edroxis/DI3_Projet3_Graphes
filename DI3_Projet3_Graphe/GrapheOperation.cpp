@@ -17,6 +17,17 @@
 
 #include "GrapheOperation.h"
 
+/**************************************************
+* GOPinverserGraphe
+* *************************************************
+* Renvoie un graphe inverse à celui passé en paramètre
+* *************************************************
+* Entrée: un graphe
+* Pré-condition :
+* Sortie : un nouveau graphe
+* Post-condition : Création d'un nouveau graphe qui 
+* est l'inverse de celui en paramètre
+* ************************************************/
 CGraphe* CGrapheOperation::GOPinverserGraphe(CGraphe& GPHparam)
 {
     CGraphe* GPHres = new CGraphe();
