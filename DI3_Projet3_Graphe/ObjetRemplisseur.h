@@ -15,6 +15,13 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: CObjetRemplisseur
+***************************************************
+Classe abstraite pour implémenter la construction
+d'un objet à partir de CParseur
+**************************************************/
+
 #ifndef COBJETREMPLISSEUR_H
 #define COBJETREMPLISSEUR_H
 
@@ -23,9 +30,57 @@
 class CObjetRemplisseur
 {
 public:
+	/**************************************************
+	* Destructeur de CObjetRemplisseur
+	* *************************************************
+	* Il est simplement déclaré pour appelé les destructeurs
+	* des classes dérivées en cas de polymotphisme
+	* *************************************************
+	* Entrée:
+	* Pré-condition :
+	* Sortie : 
+	* Post-condition : Les destructeurs spécialisés sont
+	*                  appelés
+	* ************************************************/
 	virtual ~CObjetRemplisseur() {};
+	
+	/**************************************************
+	* registerObject2Modify
+	* *************************************************
+	* Permet aux classes fille de faire référence à l'
+	* objet destiné à être modifié
+	* *************************************************
+	* Entrée: l'objet à modifier en question
+	* Pré-condition : obj != null
+	* Sortie : 
+	* Post-condition :
+	* ************************************************/
 	virtual void registerObject2Modify(void* obj) = 0;
+	
+	/**************************************************
+	* handleVariable
+	* *************************************************
+	* Est exécuté par le parseur quand une variable
+	* est disponible
+	* *************************************************
+	* Entrée: la variable du fichier en question
+	* Pré-condition :
+	* Sortie : 
+	* Post-condition :
+	* ************************************************/
 	virtual void handleVariable(const CParseurVariable& var) = 0;
+
+	/**************************************************
+	* handleArray
+	* *************************************************
+	* Est exécuté par le parseur quand un tableau est
+	* disponible
+	* *************************************************
+	* Entrée: le tableau du fichier en question
+	* Pré-condition :
+	* Sortie : 
+	* Post-condition :
+	* ************************************************/
 	virtual void handleArray(const CParseurTableau& arr) = 0;
 };
 

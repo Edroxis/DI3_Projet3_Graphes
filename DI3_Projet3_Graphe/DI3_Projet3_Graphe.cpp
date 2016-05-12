@@ -69,6 +69,10 @@ int main(int argc, char* argv[])
 			case EXCEPTION_UNABLE_TO_PARSE_FILE:
 				cerr << "Impossible de parser le fichier car il est corrompu." << endl;
 				break;
+
+			default:
+				cerr << "Erreur inconnue" << endl;
+				break;
 			}
 		}
 	}

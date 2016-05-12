@@ -14,6 +14,15 @@
 | You should have received a copy of the GNU General Public License    |
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
+
+/**************************************************
+Titre: CParseur
+***************************************************
+C'est le parseur associé à un certain formattage
+de document. Il délègue la création de l'objet à
+une instance de la classe abstraite CObjetRemplisseur
+**************************************************/
+
 #include "Parseur.h"
 #include "Cexception.h"
 #include "MyString.h"
@@ -21,12 +30,35 @@
 
 using namespace std;
 
+/**************************************************
+* CParseur
+* *************************************************
+* Constructeur de CParseur
+* *************************************************
+* Entrée: instance d'un CObjetRemplisseur
+* Pré-condition : remplisseur != null
+* Sortie :
+* Post-condition : l'objet est crééer
+* ************************************************/
 CParseur::CParseur(CObjetRemplisseur* objRemplisseur)
 {
 	remplisseur = objRemplisseur;
 	tableauEnParsement = false;
 }
 
+/**************************************************
+* PRSparse
+* *************************************************
+* Lance le parsage
+* *************************************************
+* Entrée: emplacement: localisation absolu sur le
+*                      disque dur
+*         objetARemplir: un pointeur vers l'objet
+*                        qui doit être construit
+* Pré-condition : aucun pointeur paramètre null
+* Sortie :
+* Post-condition : objetARemplir est complété
+* ************************************************/
 void CParseur::PRSparse(const char* emplacement, void* objetARemplir)
 {
 	remplisseur->registerObject2Modify(objetARemplir);
@@ -47,6 +79,16 @@ void CParseur::PRSparse(const char* emplacement, void* objetARemplir)
 	file.close();
 }
 
+/**************************************************
+* PRSparseLine
+* *************************************************
+* S'occupe de parser juste une ligne
+* *************************************************
+* Entrée: line: la ligne à parser
+* Pré-condition : line != null
+* Sortie :
+* Post-condition :
+* ************************************************/
 void CParseur::PRSparseLine(char* line)
 {
 	CMyString::MSTsuppEspace(line);
@@ -62,6 +104,18 @@ void CParseur::PRSparseLine(char* line)
 		PRSparseVariable(line, index);
 }
 
+/**************************************************
+* PRSparseArray
+* *************************************************
+* Est éxécuté quand la ligne est contenu dans un
+* tableau
+* *************************************************
+* Entrée: line: la ligne à parser ; equalPos : l'index
+*         du symbole '='
+* Pré-condition : line != null
+* Sortie :
+* Post-condition :
+* ************************************************/
 void CParseur::PRSparseArray(char * line, int equalPos)
 {
 	static CParseurTableau tab;
@@ -133,6 +187,18 @@ void CParseur::PRSparseArray(char * line, int equalPos)
 	}
 }
 
+/**************************************************
+* PRSparseVariable
+* *************************************************
+* Est éxécuté quand la ligne est une déclaration de
+* variable
+* *************************************************
+* Entrée: line: la ligne à parser ; equalPos : l'index
+*         du symbole '='
+* Pré-condition : line != null
+* Sortie :
+* Post-condition :
+* ************************************************/
 void CParseur::PRSparseVariable(char* line, int equalPos)
 {
 	char key[64];

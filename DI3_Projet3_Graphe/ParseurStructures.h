@@ -18,12 +18,24 @@
 #ifndef PARSEURSTRUCTURES_H
 #define PARSEURSTRUCTURES_H
 
+/**************************************************
+Titre: CParseurVariable
+***************************************************
+C'est la structure qui correspond, dans un fichier
+à ce type d'élément "key=value"
+**************************************************/
 struct CParseurVariable
 {
 	char * key;
 	char * value;
 };
 
+/**************************************************
+Titre: CParseurTableau
+***************************************************
+C'est la structure qui correspond, dans un fichier
+à ce type d'élément "key=[key=value,key=value]"
+**************************************************/
 struct CParseurTableau
 {
 	char * key;
