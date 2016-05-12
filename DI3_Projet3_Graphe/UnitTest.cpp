@@ -28,6 +28,7 @@ Permet de tester nos classes et leurs fonctions.
 #include "Arc.h"
 #include "Parseur.h"
 #include "MyString.h"
+#include "GrapheOperation.h"
 #include <cassert>
 
 /**************************************************
@@ -78,6 +79,8 @@ void CUnitTest::run()
 
 	test_MST_suppEspaces();
 	test_MST_trouverChar();
+
+	test_GOP_inverserGraphe();
 }
 
 /**************************************************
@@ -568,6 +571,17 @@ void CUnitTest::test_ARC()
 	assert(&monArcCopie.ARCgetDest() == &monArc.ARCgetDest());
 }
 
+/**************************************************
+* test_MST_suppEspaces
+* *************************************************
+* Test de la méthode de CMyString pour supprimer les espaces
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_MST_suppEspaces()
 {
 	char text1[] = "     Lorem ipsum sit";
@@ -583,10 +597,68 @@ void CUnitTest::test_MST_suppEspaces()
 	assert(strcmp(text3, "abffd\nfdfdfd\t") == 0);
 }
 
+/**************************************************
+* test_MST_trouverChar
+* *************************************************
+* Test de la méthode de CMyString pour obtenir l'index d'un caractère
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_MST_trouverChar()
 {
 	char* text1 = " trouver le line feed\n !";
 	assert(CMyString::MSTtrouverChar(text1, '\n') == 21);
 	assert(CMyString::MSTtrouverChar(text1, '!') == 23);
 	assert(CMyString::MSTtrouverChar(text1, 'e') == 6);
+}
+
+/**************************************************
+* test_GOP_inverserGraphe
+* *************************************************
+* Test de la méthode de CGrapheOperation pour l'inversion de graphe
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
+void CUnitTest::test_GOP_inverserGraphe()
+{
+	CGraphe monGraphe;
+	CSommet sommet1(1), sommet2(2), sommet3(3);
+
+	monGraphe.GPHajouterSommet(&sommet1);
+	monGraphe.GPHajouterSommet(&sommet2);
+	monGraphe.GPHajouterSommet(&sommet3);
+
+	/* 1 -> 2
+		* 2 -> 3
+		* 3 -> 3 */
+	CSommet::SMTajouterArc(sommet1, sommet2);
+	CSommet::SMTajouterArc(sommet2, sommet3);
+	CSommet::SMTajouterArc(sommet3, sommet3);
+
+	CGraphe* grapheInverse = CGrapheOperation::GOPinverserGraphe(monGraphe);
+	CSommet& sommet1Inv = grapheInverse->GPHgetSommet(1);
+	CSommet& sommet2Inv = grapheInverse->GPHgetSommet(2);
+	CSommet& sommet3Inv = grapheInverse->GPHgetSommet(3);
+
+	/* 2 -> 1
+	 * 3 -> 2
+	 * 3 -> 3 */
+	assert(sommet1Inv.SMTgetNbPartant() == 0);
+	assert(sommet1Inv.SMTgetNbArrivant() == 1);
+	assert(sommet2Inv.SMTgetNbPartant() == 1);
+	assert(sommet2Inv.SMTgetNbArrivant() == 1);
+	assert(sommet3Inv.SMTgetNbPartant() == 2);
+	assert(sommet3Inv.SMTgetNbArrivant() == 1);
+
+	assert(CSommet::SMTgetArc(sommet2Inv, sommet1Inv) != 0);
+	assert(CSommet::SMTgetArc(sommet3Inv, sommet2Inv) != 0);
+	assert(CSommet::SMTgetArc(sommet3Inv, sommet3Inv) != 0);
 }

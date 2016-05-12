@@ -252,26 +252,41 @@ private:
 /**************************************************
 * test_MST_suppEspaces
 * *************************************************
-* 
+* Test de la méthode de CMyString pour supprimer les espaces
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
 * ************************************************/
 	void test_MST_suppEspaces();
 
 /**************************************************
 * test_MST_trouverChar
 * *************************************************
-* 
+* Test de la méthode de CMyString pour obtenir l'index d'un caractère
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
 * ************************************************/
 	void test_MST_trouverChar();
+
+/**************************************************
+* test_GOP_inverserGraphe
+* *************************************************
+* Test de la méthode de CGrapheOperation pour l'inversion de graphe
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
+	void test_GOP_inverserGraphe();
 };
 
 #endif
