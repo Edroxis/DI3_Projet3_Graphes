@@ -4,10 +4,31 @@
 #include "Arc.h"
 #include <cassert>
 
+/**************************************************
+* CUnitTest
+* *************************************************
+* Constructeur par défaut de CUnitTest, ne fait rien
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : 
+* ************************************************/
 CUnitTest::CUnitTest()
 {
 }
 
+/**************************************************
+* run
+* *************************************************
+* Lance tous les tests
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = tout 
+* est fonctionnel
+* ************************************************/
 void CUnitTest::run()
 {
 	test_GPH_getTotalSommet();
@@ -30,6 +51,17 @@ void CUnitTest::run()
 	test_ARC();
 }
 
+/**************************************************
+* test_GPH_getTotalSommet
+* *************************************************
+* Test de la fonction CGraphe::getTotalSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_getTotalSommet()
 {
 	CGraphe monGraphe;
@@ -40,6 +72,17 @@ void CUnitTest::test_GPH_getTotalSommet()
 	assert(monGraphe.GPHgetTotalSommet() == 1);
 }
 
+/**************************************************
+* test_GPH_getSommet
+* *************************************************
+* Test de la fonction CGraphe::getSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_getSommet()
 {
 	unsigned int numeroSommet = 56;
@@ -71,6 +114,17 @@ void CUnitTest::test_GPH_getSommet()
 	}
 }
 
+/**************************************************
+* test_GPH_existantSommet
+* *************************************************
+* Test de la fonction CGraphe::existantSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_existantSommet()
 {
 	CGraphe monGraphe;
@@ -81,6 +135,17 @@ void CUnitTest::test_GPH_existantSommet()
 	assert(!monGraphe.GPHexistantSommet(2));
 }
 
+/**************************************************
+* test_GPH_ajouterSommet
+* *************************************************
+* Test de la fonction CGraphe::ajouterSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_ajouterSommet()
 {
 	CGraphe monGraphe;
@@ -108,6 +173,17 @@ void CUnitTest::test_GPH_ajouterSommet()
 	assert(monGraphe.GPHgetTotalSommet() == 2);
 }
 
+/**************************************************
+* test_GPH_supprimerSommet
+* *************************************************
+* Test de la fonction CGraphe::supprimerSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_supprimerSommet()
 {
 	CGraphe monGraphe;
@@ -160,7 +236,17 @@ void CUnitTest::test_GPH_supprimerSommet()
 	}
 }
 
-
+/**************************************************
+* test_GPH_fichier
+* *************************************************
+* Test du chargeur de fichier
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_GPH_fichier()
 {
 	//TODO: Tester avec graphe correcte et pas correct (exceptions)
@@ -170,7 +256,17 @@ void CUnitTest::test_GPH_fichier()
 	std::cout << "-----------------" << std::endl;
 }
 
-
+/**************************************************
+* test_SMT_getNumero
+* *************************************************
+* Test de la fonction CSommet::getNumero
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getNumero()
 {
 	CSommet monSommet1(1);
@@ -182,6 +278,17 @@ void CUnitTest::test_SMT_getNumero()
 	assert(monSommet3.SMTgetNumero() == 8);
 }
 
+/**************************************************
+* test_SMT_getPartant
+* *************************************************
+* Test de la fonction CSommet::getPartant
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getPartant()
 {
 	CSommet monSommet1(1);
@@ -197,6 +304,17 @@ void CUnitTest::test_SMT_getPartant()
 	assert(&arcPartants[1]->ARCgetDest() == &monSommet3);
 }
 
+/**************************************************
+* test_SMT_getArrivant
+* *************************************************
+* Test de la fonction CSommet::getArrivant
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getArrivant()
 {
 	CSommet monSommet1(1);
@@ -211,6 +329,17 @@ void CUnitTest::test_SMT_getArrivant()
 	assert(&arcArrivants[1]->ARCgetDest() == &monSommet2);
 }
 
+/**************************************************
+* test_SMT_ajouterArc
+* *************************************************
+* Test de la fonction CSommet::ajouterArc
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_ajouterArc()
 {
 	CSommet sommet1(1);
@@ -240,6 +369,17 @@ void CUnitTest::test_SMT_ajouterArc()
 	}
 }
 
+/**************************************************
+* test_SMT_supprimerArc
+* *************************************************
+* Test de la fonction CSommet::supprimerArc
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_supprimerArc()
 {
 	CSommet monSommet1(1);
@@ -261,6 +401,17 @@ void CUnitTest::test_SMT_supprimerArc()
 	assert(&arcPartants[0]->ARCgetDest() == &monSommet3);
 }
 
+/**************************************************
+* test_SMT_getArc
+* *************************************************
+* Test de la fonction CSommet::getArc
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getArc()
 {
 	CSommet monSommet1(1);
@@ -274,6 +425,17 @@ void CUnitTest::test_SMT_getArc()
 	assert(CSommet::SMTgetArc(monSommet1, monSommet1) == 0);
 }
 
+/**************************************************
+* test_SMT_getNbArrivant
+* *************************************************
+* Test de la fonction CSommet::getNbArrivant
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getNbArrivant()
 {
 	CSommet monSommet1(1);
@@ -289,6 +451,17 @@ void CUnitTest::test_SMT_getNbArrivant()
 	assert(monSommet2.SMTgetNbArrivant() == 2);
 }
 
+/**************************************************
+* test_SMT_getNbPartant
+* *************************************************
+* Test de la fonction CSommet::getNbPartant
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_SMT_getNbPartant()
 {
 	CSommet monSommet1(1);
@@ -304,7 +477,17 @@ void CUnitTest::test_SMT_getNbPartant()
 	assert(monSommet1.SMTgetNbPartant() == 2);
 }
 
-
+/**************************************************
+* test_ARC
+* *************************************************
+* Test du constructeur de CArc et costructeur de recopie
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : aucun assert déclenché = méthode 
+* fonctionnelle
+* ************************************************/
 void CUnitTest::test_ARC()
 {
 	CSommet monSommetDestination(2);
