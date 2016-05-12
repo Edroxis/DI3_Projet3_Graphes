@@ -15,6 +15,15 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de Gestion des Graphes
+***************************************************
+Corps de la classe CGraphe.
+Permet de créer un graphe, ajouter, supprimer un sommet
+obtenir la liste des sommets, le nombre total et 
+afficher la structure sur la console.
+**************************************************/
+
 #include "Graphe.h"
 #include "Parseur.h"
 #include "GrapheRemplisseur.h"
@@ -24,12 +33,33 @@
 
 using namespace std;
 
+/**************************************************
+* CGraphe
+* *************************************************
+* Constructeur de Cgraphe
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : Construction d'un CGraphe vide
+* ************************************************/
 CGraphe::CGraphe()
 {
 	ppSMTGPHliste = 0;
 	uiGPHtotalSommet = 0;
 }
 
+/**************************************************
+* CGraphe
+* *************************************************
+* Initialise un graphe à partir d'un fichier
+* *************************************************
+* Entrée: chemin vers le fichier
+* Pré-condition : le fichier est valide
+* Sortie :
+* Post-condition : un graphe est créer suivant les 
+* données du fichier
+* ************************************************/
 CGraphe::CGraphe(char const * const chemin)
 {
 	ppSMTGPHliste = 0;
@@ -41,11 +71,31 @@ CGraphe::CGraphe(char const * const chemin)
 	parseur.PRSparse(chemin, this);
 }
 
+/**************************************************
+* ~CGraphe
+* *************************************************
+* Destructeur de CGraphe
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : le Graphe est correctement détruit
+* ************************************************/
 CGraphe::~CGraphe()
 {
 	free(ppSMTGPHliste);
 }
 
+/**************************************************
+* GPHajouterSommet
+* *************************************************
+* Permet d'ajouter un sommet au graphe
+* *************************************************
+* Entrée: pointeur sur un CSommet, alloué par new
+* Pré-condition :
+* Sortie :
+* Post-condition : le Sommet à été ajouté au graphe
+* ************************************************/
 void CGraphe::GPHajouterSommet(CSommet* SMTparam)
 {
 	if(GPHexistantSommet(SMTparam->SMTgetNumero()))
@@ -57,6 +107,16 @@ void CGraphe::GPHajouterSommet(CSommet* SMTparam)
     ppSMTGPHliste[uiGPHtotalSommet-1] = SMTparam;
 }
 
+/**************************************************
+* GPHsupprimerSommet
+* *************************************************
+* Permet de Supprimer un Sommet
+* *************************************************
+* Entrée: référence du sommet à supprimer
+* Pré-condition :
+* Sortie :
+* Post-condition : le sommet à correctement été sipprimé
+* ************************************************/
 void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
 {
     unsigned int uiboucle;
@@ -78,6 +138,17 @@ void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
     ppSMTGPHliste = (CSommet **) realloc(ppSMTGPHliste, uiGPHtotalSommet * sizeof(CSommet *));
 }
 
+/**************************************************
+* GPHexistantSommet
+* *************************************************
+* Test l'existance d'un sommet dans le graphe à partir
+* de son numéro
+* *************************************************
+* Entrée: numéro du sommet
+* Pré-condition :
+* Sortie : true si le Sommet est présent, faux sinon
+* Post-condition : 
+* ************************************************/
 bool CGraphe::GPHexistantSommet(unsigned int inumero) const
 {
 	unsigned int uiboucle;
@@ -89,10 +160,17 @@ bool CGraphe::GPHexistantSommet(unsigned int inumero) const
 	return false;
 }
 
-CSommet const * const * const CGraphe::GPHgetListeSommet() const{
-	return ppSMTGPHliste;
-}
-
+/**************************************************
+* GPHgetSommet
+* *************************************************
+* Obtenir la réfrence d'un sommet à partir de son numéro
+* *************************************************
+* Entrée: numéro du noeud cherché
+* Pré-condition :
+* Sortie : référence vers le sommet portant le numéro 
+* en paramètre
+* Post-condition : renvoie une exception si sommet introuvable
+* ************************************************/
 CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
 {
     unsigned int uiboucle;
@@ -104,7 +182,17 @@ CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
     throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
 }
 
-
+/**************************************************
+* GPHprintGraphe
+* *************************************************
+* Affiche la Structure entière du graphe
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : La structure du graphe est affichée 
+* dans la console
+* ************************************************/
 void CGraphe::GPHprintGraphe(){
     unsigned int uiboucle;
     for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)

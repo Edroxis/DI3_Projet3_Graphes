@@ -43,71 +43,73 @@ public:
 /**************************************************
 * CGraphe
 * *************************************************
-* 
+* Constructeur de Cgraphe
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : Construction d'un CGraphe vide
 * ************************************************/
 	CGraphe();
 
 /**************************************************
 * CGraphe
 * *************************************************
-* 
+* Initialise un graphe à partir d'un fichier
 * *************************************************
-* Entrée:
-* Pré-condition :
+* Entrée: chemin vers le fichier
+* Pré-condition : le fichier est valide
 * Sortie :
-* Post-condition : 
+* Post-condition : un graphe est créer suivant les 
+* données du fichier
 * ************************************************/
 	CGraphe(char const * const chemin);
 
 /**************************************************
 * ~CGraphe
 * *************************************************
-* 
+* Destructeur de CGraphe
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : le Graphe est correctement détruit
 * ************************************************/
 	~CGraphe();
 
 /**************************************************
 * GPHajouterSommet
 * *************************************************
-* 
+* Permet d'ajouter un sommet au graphe
 * *************************************************
-* Entrée:
+* Entrée: pointeur sur un CSommet, alloué par new
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : le Sommet à été ajouté au graphe
 * ************************************************/
 	void GPHajouterSommet(CSommet* SMTparam);
 
 /**************************************************
 * GPHsupprimerSommet
 * *************************************************
-* 
+* Permet de Supprimer un Sommet
 * *************************************************
-* Entrée:
+* Entrée: référence du sommet à supprimer
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : le sommet à correctement été sipprimé
 * ************************************************/
 	void GPHsupprimerSommet(CSommet& SMTparam);
 
 /**************************************************
 * GPHexistantSommet
 * *************************************************
-* 
+* Test l'existance d'un sommet dans le graphe à partir
+* de son numéro
 * *************************************************
-* Entrée:
+* Entrée: numéro du sommet
 * Pré-condition :
-* Sortie :
+* Sortie : true si le Sommet est présent, faux sinon
 * Post-condition : 
 * ************************************************/
 	bool GPHexistantSommet(unsigned int inumero) const;
@@ -115,65 +117,52 @@ public:
 /**************************************************
 * GPHgetSommet
 * *************************************************
-* 
+* Obtenir la réfrence d'un sommet à partir de son numéro
 * *************************************************
-* Entrée:
+* Entrée: numéro du noeud cherché
 * Pré-condition :
-* Sortie :
-* Post-condition : 
+* Sortie : référence vers le sommet portant le numéro 
+* en paramètre
+* Post-condition : renvoie une exception si sommet introuvable
 * ************************************************/
 	CSommet& GPHgetSommet(unsigned int inumero);
 
 /**************************************************
 * GPHgetListeSommet
 * *************************************************
-* 
+* Obtenir la liste des sommets
 * *************************************************
 * Entrée:
 * Pré-condition :
-* Sortie :
+* Sortie : retourne la liste des sommets
 * Post-condition : 
 * ************************************************/
-	CSommet const * const * const GPHgetListeSommet() const;
+	CSommet const * const * const GPHgetListeSommet() const {return ppSMTGPHliste;}
 
 /**************************************************
 * GPHgetTotalSommet
 * *************************************************
-* 
+* Obtenir le nombre total de Sommets
 * *************************************************
 * Entrée:
 * Pré-condition :
-* Sortie :
+* Sortie : nombre total de sommets
 * Post-condition : 
 * ************************************************/
-	unsigned int GPHgetTotalSommet() const;
+	unsigned int GPHgetTotalSommet() const {return uiGPHtotalSommet;}
 
 /**************************************************
 * GPHprintGraphe
 * *************************************************
-* 
+* Affiche la Structure entière du graphe
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : La structure du graphe est affichée 
+* dans la console
 * ************************************************/
     void GPHprintGraphe();
 };
-
-/**************************************************
-* GPHgetTotalSommet
-* *************************************************
-* 
-* *************************************************
-* Entrée:
-* Pré-condition :
-* Sortie :
-* Post-condition : 
-* ************************************************/
-inline unsigned int CGraphe::GPHgetTotalSommet() const
-{
-	return uiGPHtotalSommet;
-}
 
 #endif
