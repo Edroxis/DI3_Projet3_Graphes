@@ -58,7 +58,7 @@ public:
 * Sortie :
 * Post-condition : CArc est détruit
 * ************************************************/
-	~CArc(void);
+	~CArc(void){}
 
 /**************************************************
 * ARCgetDest
@@ -70,7 +70,7 @@ public:
 * Sortie : Destination (ou origine) de l'arc
 * Post-condition : 
 * ************************************************/
-	CSommet& ARCgetDest() const;
+	CSommet& ARCgetDest() const {return *pSMTARCdest;}
 };
 
 #endif

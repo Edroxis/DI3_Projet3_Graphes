@@ -38,33 +38,3 @@ CArc::CArc(CSommet& SMTparam)
 {
     pSMTARCdest = &SMTparam;
 }
-
-/**************************************************
-* ~CArc
-* *************************************************
-* Destructeur de CArc
-* *************************************************
-* Entrée:
-* Pré-condition :
-* Sortie :
-* Post-condition : CArc est détruit
-* ************************************************/
-CArc::~CArc()
-{
-
-}
-
-/**************************************************
-* ARCgetDest
-* *************************************************
-* Obtenir la destination (ou l'origine) de l'arc
-* *************************************************
-* Entrée:
-* Pré-condition :
-* Sortie : Destination (ou origine) de l'arc
-* Post-condition : 
-* ************************************************/
-CSommet& CArc::ARCgetDest() const
-{
-    return *pSMTARCdest;
-}

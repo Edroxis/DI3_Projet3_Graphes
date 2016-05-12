@@ -84,10 +84,11 @@ CSommet::~CSommet(void)
     unsigned int uiboucle;
 
     uiSMTnumero = 0;
-
-    for(uiboucle = 0; uiboucle < uiSMTnbArrivant; uiboucle++)
+	
+    for(uiboucle = 0; uiboucle < uiSMTnbArrivant; uiboucle++)	//Parcours les arrivant
         delete ppARCSMTarrivant[uiboucle];
-    for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)
+
+    for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)	//Parcours les partant
         delete ppARCSMTpartant[uiboucle];
 }
 
@@ -105,7 +106,7 @@ CSommet::~CSommet(void)
 * ************************************************/
 void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant)
 {
-	if(SMTgetArc(SMTpartant, SMTarrivant) != 0)
+	if(SMTgetArc(SMTpartant, SMTarrivant) != 0)	//Si arc existe déjà
 		throw Cexception(EXCEPTION_ARC_EXISTANT);
 
     SMTpartant.SMTajouterArcPartant(SMTarrivant);
@@ -143,7 +144,7 @@ void CSommet::SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant)
 * ************************************************/
 CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& SMTarrivant)
 {
-	for(unsigned int uiIndexArc = 0; uiIndexArc < SMTpartant.SMTgetNbPartant(); uiIndexArc++)
+	for(unsigned int uiIndexArc = 0; uiIndexArc < SMTpartant.SMTgetNbPartant(); uiIndexArc++)	//Parcours les arcs
 	{
 		CArc const * const testedArc = SMTpartant.ppARCSMTpartant[uiIndexArc];
 		if(&testedArc->ARCgetDest() == &SMTarrivant)
@@ -168,10 +169,10 @@ CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& 
 void CSommet::SMTprintSommet() const
 {
     unsigned int uiboucle;
-    for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)
+    for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)	//Parcours arcs partant
         cout << uiSMTnumero << "->" << ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
 
-    for(uiboucle = 0; uiboucle < uiSMTnbArrivant; uiboucle++)
+    for(uiboucle = 0; uiboucle < uiSMTnbArrivant; uiboucle++)	//Parcours Arcs arrivant
         cout << uiSMTnumero << "<-" << ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
 }
 
@@ -244,10 +245,10 @@ void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest)
 
     uiSMTnbPartant--;
 
-    for(uiboucle = 0; uiboucle < uiSMTnbPartant &&
+    for(uiboucle = 0; uiboucle < uiSMTnbPartant &&	//Parcours des partants pour arriver jusqu'a l'arc à supprimer
 		SMTdest.SMTgetNumero() != ppARCSMTpartant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
 
-    for(; uiboucle < uiSMTnbPartant/*-1*/; uiboucle++)
+    for(; uiboucle < uiSMTnbPartant; uiboucle++)	//Réduire le tableau, écrase l'arc à supprimer
         ppARCSMTpartant[uiboucle] = ppARCSMTpartant[uiboucle+1];
 
     ppARCSMTpartant = (CArc **) realloc(ppARCSMTpartant, uiSMTnbPartant * sizeof(CArc*));
@@ -270,10 +271,10 @@ void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc)
 
     uiSMTnbArrivant--;
 
-    for(uiboucle = 0; uiboucle < uiSMTnbArrivant &&
+    for(uiboucle = 0; uiboucle < uiSMTnbArrivant &&	//Parcours des arrivant pour arriver jusqu'a l'arc à supprimer
 		SMTsrc.SMTgetNumero() != ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero(); uiboucle++);
 
-    for(; uiboucle < uiSMTnbArrivant/*-1*/; uiboucle++)
+    for(; uiboucle < uiSMTnbArrivant; uiboucle++)	//Réduire le tableau, écrase l'arc à supprimer
         ppARCSMTarrivant[uiboucle] = ppARCSMTarrivant[uiboucle+1];
 
     ppARCSMTarrivant = (CArc **) realloc(ppARCSMTarrivant, uiSMTnbArrivant * sizeof(CArc*));

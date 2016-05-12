@@ -64,10 +64,10 @@ void CMyString::MSTsuppEspace(char * const pcchaine)
 int CMyString::MSTtrouverChar(char const * const ch1, char const c)
 {
     int iboucle = 0;
-    while(ch1[iboucle] != 0)
+    while(ch1[iboucle] != 0)	//Tant qu'on est pas à la fin de la chaîne
     {
-        if(ch1[iboucle] == c)
-            return iboucle;
+        if(ch1[iboucle] == c)	//Si on trouve le caractère
+            return iboucle;		//on retourne l'indice
         iboucle++;
     }
     return -1;

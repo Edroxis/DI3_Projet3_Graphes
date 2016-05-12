@@ -98,7 +98,7 @@ CGraphe::~CGraphe()
 * ************************************************/
 void CGraphe::GPHajouterSommet(CSommet* SMTparam)
 {
-	if(GPHexistantSommet(SMTparam->SMTgetNumero()))
+	if(GPHexistantSommet(SMTparam->SMTgetNumero()))	//Si sommet existe déjà
 		throw Cexception(EXCEPTION_SOMMET_EXISTANT);
 
     uiGPHtotalSommet++;
@@ -119,17 +119,18 @@ void CGraphe::GPHajouterSommet(CSommet* SMTparam)
 * ************************************************/
 void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
 {
-	//On supprime les arcs partant de ce sommet
+    unsigned int uiboucle;
+	const CArc* const * arcArrivants = SMTparam.SMTgetArrivant();
 	const CArc* const * arcPartants = SMTparam.SMTgetPartant();
+
+	//On supprime les arcs partant de ce sommet
 	for(unsigned int uiArc = 0; uiArc < SMTparam.SMTgetNbPartant(); uiArc++)
 		CSommet::SMTsupprimerArc(SMTparam, arcPartants[uiArc]->ARCgetDest());
 
 	//Puis les arcs arrivants à ce sommet
-	const CArc* const * arcArrivants = SMTparam.SMTgetArrivant();
 	for(unsigned int uiArc = 0; uiArc < SMTparam.SMTgetNbArrivant(); uiArc++)
 		CSommet::SMTsupprimerArc(arcArrivants[uiArc]->ARCgetDest(), SMTparam);
 
-    unsigned int uiboucle;
 	/* On incrémente uiboucle tant que le sommet n'est pas trouvé,
 	dès qu'il est trouvé uiboucle fait référence à l'index du sommet */
     for(uiboucle = 0; uiboucle < uiGPHtotalSommet &&
@@ -138,6 +139,7 @@ void CGraphe::GPHsupprimerSommet(CSommet& SMTparam)
 	if(uiboucle == uiGPHtotalSommet)
 		throw Cexception(EXCEPTION_SOMMET_INTROUVABLE);
 
+	//On réduit le tableau, écrasement de la référence du sommet à supprimer
     for(; uiboucle < uiGPHtotalSommet - 1; uiboucle++)
         ppSMTGPHliste[uiboucle] = ppSMTGPHliste[uiboucle+1];
 
@@ -160,7 +162,7 @@ bool CGraphe::GPHexistantSommet(unsigned int inumero) const
 {
 	unsigned int uiboucle;
 
-	for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
+	for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)	//Parcours de la table des sommets
 		if(ppSMTGPHliste[uiboucle]->SMTgetNumero() == inumero)
 			return true;
 
@@ -182,7 +184,7 @@ CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
 {
     unsigned int uiboucle;
 
-    for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
+    for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)	//Parcours de la table des sommets
         if(ppSMTGPHliste[uiboucle]->SMTgetNumero() == inumero)
             return *ppSMTGPHliste[uiboucle];
 
@@ -202,7 +204,7 @@ CSommet& CGraphe::GPHgetSommet(unsigned int inumero)
 * ************************************************/
 void CGraphe::GPHprintGraphe(){
     unsigned int uiboucle;
-    for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)
+    for(uiboucle = 0; uiboucle < uiGPHtotalSommet; uiboucle++)	//Parcours de la table des sommets
     {
         ppSMTGPHliste[uiboucle]->SMTprintSommet();
         cout << endl;
