@@ -15,6 +15,14 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de Stockage des fonctions liées aux graphes
+***************************************************
+Corps de la classe CGrapheOperation.
+Contient toutes les fonctions spécifiques relatives 
+aux graphes.
+**************************************************/
+
 #include "GrapheOperation.h"
 
 /**************************************************
