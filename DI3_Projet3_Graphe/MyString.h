@@ -33,23 +33,23 @@ public:
 /**************************************************
 * MSTsuppEspace
 * *************************************************
-* 
+* Supprime les espaces d'une chaine de caractère
 * *************************************************
-* Entrée:
+* Entrée: tableau de caractères
 * Pré-condition :
-* Sortie :
-* Post-condition : 
+* Sortie : 
+* Post-condition : Les espaces de la chaîne sont supprimés
 * ************************************************/
     static void MSTsuppEspace(char * const pcchaine);
 
 /**************************************************
 * MSTtrouverChar
 * *************************************************
-* 
+* Renvoie l'indice de la 1ère occurence d'un char
 * *************************************************
-* Entrée:
+* Entrée: chaine de caractère, char cherché
 * Pré-condition :
-* Sortie :
+* Sortie : indice du char, -1 si non trouvé
 * Post-condition : 
 * ************************************************/
     static int MSTtrouverChar(char const * const ch1, char const c);

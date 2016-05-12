@@ -18,6 +18,16 @@
 #include "MyString.h"
 #include <string.h>
 
+/**************************************************
+* MSTsuppEspace
+* *************************************************
+* Supprime les espaces d'une chaine de caractère
+* *************************************************
+* Entrée: tableau de caractères
+* Pré-condition :
+* Sortie : 
+* Post-condition : Les espaces de la chaîne sont supprimés
+* ************************************************/
 void CMyString::MSTsuppEspace(char * const pcchaine)
 {
 	char* pcFirstIndex = pcchaine;
@@ -33,6 +43,16 @@ void CMyString::MSTsuppEspace(char * const pcchaine)
 	*pcFirstIndex = '\0';
 }
 
+/**************************************************
+* MSTtrouverChar
+* *************************************************
+* Renvoie l'indice de la 1ère occurence d'un char
+* *************************************************
+* Entrée: chaine de caractère, char cherché
+* Pré-condition :
+* Sortie : indice du char, -1 si non trouvé
+* Post-condition : 
+* ************************************************/
 int CMyString::MSTtrouverChar(char const * const ch1, char const c)
 {
     int iboucle = 0;
