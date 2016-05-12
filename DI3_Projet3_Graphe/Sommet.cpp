@@ -6,12 +6,33 @@
 
 using namespace std;
 
+/**************************************************
+* CSommet
+* *************************************************
+* Constructeur de recopie, ne pas appeller!
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : Créé un CSommet vide
+* ************************************************/
 CSommet::CSommet(const CSommet& SMTparam)
 {
 	//On ne souhaite pas de copie pour maintenir la cohérence pour les arcs
 	assert(false && "Don't copy a CSommet, it's a bad idea, you may burn in hell!");
 }
 
+/**************************************************
+* CSommet
+* *************************************************
+* Constructeur de CSommet
+* *************************************************
+* Entrée: numéro du Sommet 
+* Pré-condition : Le numéro est unique (pas déjà présent dans le graphe)
+* Sortie :
+* Post-condition : création d'un CSommet avec pour numéro
+* l'entier non signé passé en paramètre
+* ************************************************/
 CSommet::CSommet(unsigned int uiParam)
 {
     uiSMTnumero = uiParam;
@@ -21,6 +42,16 @@ CSommet::CSommet(unsigned int uiParam)
 	ppARCSMTpartant = (CArc **) malloc(0 * sizeof(CArc *));
 }
 
+/**************************************************
+* ~CSommet
+* *************************************************
+* Destructeur de CSommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : Le sommet est détruit
+* ************************************************/
 CSommet::~CSommet(void)
 {
     unsigned int uiboucle;
@@ -33,30 +64,18 @@ CSommet::~CSommet(void)
         delete ppARCSMTpartant[uiboucle];
 }
 
-unsigned int CSommet::SMTgetNumero() const{
-    return uiSMTnumero;
-}
-
-CArc const * const * CSommet::SMTgetPartant() const
-{
-    return ppARCSMTpartant;
-}
-
-CArc const * const * CSommet::SMTgetArrivant() const
-{
-    return ppARCSMTarrivant;
-}
-
-unsigned int CSommet::SMTgetNbArrivant() const
-{
-    return uiSMTnbArrivant;
-}
-
-unsigned int CSommet::SMTgetNbPartant() const
-{
-    return uiSMTnbPartant;
-}
-
+/**************************************************
+* SMTajouterArc
+* *************************************************
+* Permet d'ajouter un Arc au graphe
+* *************************************************
+* Entrée: référence au sommet de départ, référence 
+* au Sommet d'arrivée
+* Pré-condition :
+* Sortie :
+* Post-condition : un Arc allant du partant à l'arrivant 
+* a correctement été ajouté dans la structure
+* ************************************************/
 void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant)
 {
 	if(SMTgetArc(SMTpartant, SMTarrivant) != 0)
@@ -66,12 +85,35 @@ void CSommet::SMTajouterArc(CSommet& SMTpartant, CSommet& SMTarrivant)
     SMTarrivant.SMTajouterArcArrivant(SMTpartant);
 }
 
+/**************************************************
+* SMTsupprimerArc
+* *************************************************
+* Supprimer un Arc
+* *************************************************
+* Entrée: référence au Sommet de départ de l'arc à supprimer,
+* référence au sommet d'arrivée de l'arc à supprimer
+* Pré-condition :
+* Sortie :
+* Post-condition : l'Arc a correctement été supprimé 
+* de la structure
+* ************************************************/
 void CSommet::SMTsupprimerArc(CSommet& SMTpartant, CSommet& SMTarrivant)
 {
     SMTpartant.SMTsupprimerArcPartant(SMTarrivant);
     SMTarrivant.SMTsupprimerArcArrivant(SMTpartant);
 }
 
+/**************************************************
+* SMTgetArc
+* *************************************************
+* Obtenir la référence d'un certain arc
+* *************************************************
+* Entrée: Référence au Sommet de départ de l'arc cherché,
+* référence au sommet d'arrivée de l'arc cherché
+* Pré-condition :
+* Sortie : pointeur vers l'arc trouvé
+* Post-condition : retourne null si l'arc n'est pas trouvé
+* ************************************************/
 CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& SMTarrivant)
 {
 	for(unsigned int uiIndexArc = 0; uiIndexArc < SMTpartant.SMTgetNbPartant(); uiIndexArc++)
@@ -84,6 +126,18 @@ CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& 
 	return 0;
 }
 
+/**************************************************
+* SMTprintSommet
+* *************************************************
+* Afficher sur la console les sommets précédent  et 
+* suivant ce Sommet
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : liste des arrivant et partants 
+* affichée sur la console
+* ************************************************/
 void CSommet::SMTprintSommet() const
 {
     unsigned int uiboucle;
@@ -94,6 +148,33 @@ void CSommet::SMTprintSommet() const
         cout << uiSMTnumero << "<-" << ppARCSMTarrivant[uiboucle]->ARCgetDest().SMTgetNumero() << endl;
 }
 
+/**************************************************
+* operator=
+* *************************************************
+* Surcharge de l'opérateur d'affectation, ne pas appeller!
+* *************************************************
+* Entrée: Sommet à copier
+* Pré-condition :
+* Sortie :
+* Post-condition : création d'un sommet vide
+* ************************************************/
+void CSommet::operator=(const CSommet& SMTparam)
+{
+	//On ne souhaite pas de copie pour maintenir la cohérence pour les arcs
+	assert(false && "Don't copy a CSommet, it's a bad idea, you may burn in hell!");
+}
+
+/**************************************************
+* SMTajouterArcPartant
+* *************************************************
+* Permet d'ajouter un arc à la liste des partant
+* *************************************************
+* Entrée: Sommet de destination de l'arc
+* Pré-condition :
+* Sortie :
+* Post-condition : l'arc est créer et ajouté au 
+* tableau des partant
+* ************************************************/
 void CSommet::SMTajouterArcPartant(CSommet& SMTdest)
 {
     uiSMTnbPartant++;
@@ -101,6 +182,17 @@ void CSommet::SMTajouterArcPartant(CSommet& SMTdest)
     ppARCSMTpartant[uiSMTnbPartant-1] = new CArc(SMTdest);
 }
 
+/**************************************************
+* SMTajouterArcArrivant
+* *************************************************
+* Ajouter un arc à la liste des arrivant
+* *************************************************
+* Entrée: Sommet d'origine de l'arc
+* Pré-condition :
+* Sortie :
+* Post-condition : Création et ajout de l'arc au 
+* tableau des arrivant
+* ************************************************/
 void CSommet::SMTajouterArcArrivant(CSommet& SMTdest)
 {
     uiSMTnbArrivant++;
@@ -108,6 +200,17 @@ void CSommet::SMTajouterArcArrivant(CSommet& SMTdest)
     ppARCSMTarrivant[uiSMTnbArrivant-1] = new CArc(SMTdest);
 }
 
+/**************************************************
+* SMTsupprimerArcPartant
+* *************************************************
+* Supprimer l'arc menant à un certain sommet
+* *************************************************
+* Entrée: Sommet de destination de l'arc
+* Pré-condition :
+* Sortie :
+* Post-condition : l'arc menant vers le sommet en 
+* paramètre est supprimé
+* ************************************************/
 void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest)
 {
     unsigned int uiboucle;
@@ -123,6 +226,17 @@ void CSommet::SMTsupprimerArcPartant(CSommet& SMTdest)
     ppARCSMTpartant = (CArc **) realloc(ppARCSMTpartant, uiSMTnbPartant * sizeof(CArc*));
 }
 
+/**************************************************
+* SMTsupprimerArcArrivant
+* *************************************************
+* Supprimer l'arc venant d'un certain sommet
+* *************************************************
+* Entrée: sommet d'origine de l'arc
+* Pré-condition :
+* Sortie :
+* Post-condition : l'arc ayant pour origine le sommet
+* en paramètre est supprimé
+* ************************************************/
 void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc)
 {
     unsigned int uiboucle;
@@ -136,10 +250,4 @@ void CSommet::SMTsupprimerArcArrivant(CSommet& SMTsrc)
         ppARCSMTarrivant[uiboucle] = ppARCSMTarrivant[uiboucle+1];
 
     ppARCSMTarrivant = (CArc **) realloc(ppARCSMTarrivant, uiSMTnbArrivant * sizeof(CArc*));
-}
-
-void CSommet::operator=(const CSommet& SMTparam)
-{
-	//On ne souhaite pas de copie pour maintenir la cohérence pour les arcs
-	assert(false && "Don't copy a CSommet, it's a bad idea, you may burn in hell!");
 }
