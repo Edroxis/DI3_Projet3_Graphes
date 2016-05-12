@@ -84,7 +84,7 @@ CArc const * const CSommet::SMTgetArc(const CSommet& SMTpartant, const CSommet& 
 	return 0;
 }
 
-void CSommet::SMTprintSommet()
+void CSommet::SMTprintSommet() const
 {
     unsigned int uiboucle;
     for(uiboucle = 0; uiboucle < uiSMTnbPartant; uiboucle++)

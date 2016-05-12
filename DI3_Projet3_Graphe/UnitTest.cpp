@@ -16,6 +16,8 @@ void CUnitTest::run()
 	test_GPH_ajouterSommet();
 	test_GPH_supprimerSommet();
 
+	test_GPH_fichier();
+
 	test_SMT_getNumero();
 	test_SMT_getPartant();
 	test_SMT_getArrivant();
@@ -156,6 +158,16 @@ void CUnitTest::test_GPH_supprimerSommet()
 	{
 		assert(e.EXClire_valeur() == EXCEPTION_SOMMET_INTROUVABLE);
 	}
+}
+
+
+void CUnitTest::test_GPH_fichier()
+{
+	//TODO: Tester avec graphe correcte et pas correct (exceptions)
+	std::cout << "-----------------" << std::endl;
+	CGraphe monGraphe("graphe1.txt");
+	monGraphe.GPHprintGraphe();
+	std::cout << "-----------------" << std::endl;
 }
 
 

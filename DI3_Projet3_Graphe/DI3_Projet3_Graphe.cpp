@@ -1,5 +1,4 @@
 #include <iostream>
-#include "GrapheChargeurFichier.h"
 #include "GrapheOperation.h"
 #include "Graphe.h"
 #include "Cexception.h"

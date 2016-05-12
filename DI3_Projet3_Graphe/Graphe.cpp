@@ -1,5 +1,6 @@
 #include "Graphe.h"
-#include "GrapheChargeurFichier.h"
+#include "Parseur.h"
+#include "GrapheRemplisseur.h"
 #include <stdlib.h>
 #include <iostream>
 #include "Cexception.h"
@@ -14,20 +15,13 @@ CGraphe::CGraphe()
 
 CGraphe::CGraphe(char const * const chemin)
 {
-    unsigned int uiindexSommet, uiindexArc, uitotalArc;
-    CGrapheChargeurFichier chargeur;
-    chargeur.GCFchargeFichier(chemin);
-    uiGPHtotalSommet = atoi(chargeur.GCFtrouverValeur(chargeur.GCFtrouverCle("NBSommets")));
-    uitotalArc = atoi(chargeur.GCFtrouverValeur(chargeur.GCFtrouverCle("NBArcs")));
-    //std::cout << uiGPHtotalSommet << std::endl << uitotalArc;
+	ppSMTGPHliste = 0;
+	uiGPHtotalSommet = 0;
 
-    uiindexSommet = atoi(chargeur.GCFtrouverValeur(chargeur.GCFtrouverCle("Sommets")));
-    uiindexArc = atoi(chargeur.GCFtrouverValeur(chargeur.GCFtrouverCle("Arcs")));
+	CGrapheRemplisseur grapheRemplisseur;
+	CParseur parseur(&grapheRemplisseur);
 
-    //TODO lire sommets
-    //TODO remplir table des sommets
-    //TODO lire arcs
-    //TODO ajouter arcs
+	parseur.PRSparse(chemin, this);
 }
 
 CGraphe::~CGraphe()

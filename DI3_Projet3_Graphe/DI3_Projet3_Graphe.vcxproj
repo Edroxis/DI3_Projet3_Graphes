@@ -80,19 +80,23 @@
     <ClCompile Include="Cexception.cpp" />
     <ClCompile Include="DI3_Projet3_Graphe.cpp" />
     <ClCompile Include="Graphe.cpp" />
-    <ClCompile Include="GrapheChargeurFichier.cpp" />
     <ClCompile Include="GrapheOperation.cpp" />
+    <ClCompile Include="GrapheRemplisseur.cpp" />
     <ClCompile Include="MyString.cpp" />
+    <ClCompile Include="Parseur.cpp" />
     <ClCompile Include="Sommet.cpp" />
     <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arc.h" />
     <ClInclude Include="Cexception.h" />
+    <ClInclude Include="ObjetRemplisseur.h" />
+    <ClInclude Include="ParseurStructures.h" />
     <ClInclude Include="Graphe.h" />
-    <ClInclude Include="GrapheChargeurFichier.h" />
     <ClInclude Include="GrapheOperation.h" />
+    <ClInclude Include="GrapheRemplisseur.h" />
     <ClInclude Include="MyString.h" />
+    <ClInclude Include="Parseur.h" />
     <ClInclude Include="Sommet.h" />
     <ClInclude Include="UnitTest.h" />
   </ItemGroup>

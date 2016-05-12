@@ -185,7 +185,7 @@ public:
 * Sortie :
 * Post-condition : 
 * ************************************************/
-    void SMTprintSommet();
+    void SMTprintSommet() const;
 
 /**************************************************
 * operator=
