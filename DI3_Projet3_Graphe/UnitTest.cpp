@@ -2,6 +2,8 @@
 #include "Graphe.h"
 #include "Cexception.h"
 #include "Arc.h"
+#include "Parseur.h"
+#include "MyString.h"
 #include <cassert>
 
 /**************************************************
@@ -49,6 +51,9 @@ void CUnitTest::run()
 	test_SMT_getNbPartant();
 
 	test_ARC();
+
+	test_MST_suppEspaces();
+	test_MST_trouverChar();
 }
 
 /**************************************************
@@ -249,11 +254,49 @@ void CUnitTest::test_GPH_supprimerSommet()
 * ************************************************/
 void CUnitTest::test_GPH_fichier()
 {
-	//TODO: Tester avec graphe correcte et pas correct (exceptions)
-	std::cout << "-----------------" << std::endl;
-	CGraphe monGraphe("graphe1.txt");
-	monGraphe.GPHprintGraphe();
-	std::cout << "-----------------" << std::endl;
+	try
+	{
+		//Ces 2 graphes sont censés fonctionner
+		CGraphe monGraphe1("graphe1.txt");
+		CGraphe monGraphe2("graphe2.txt");
+	}
+	catch(...)
+	{
+		assert(false);
+	}
+
+	//Le suivant devrait lever une exception type fichier pas trouvé
+	try
+	{
+		CGraphe monGraphe("monjGdsd.txt");
+		assert(false && "L'ouverture de graphe aurait du levé une exception");
+	}
+	catch(Cexception& e)
+	{
+		assert(e.EXClire_valeur() == EXCEPTION_UNABLE_TO_OPEN_FILE);
+	}
+
+	//Les suivants devrait lever des exceptions type fichier mal formatté
+	try
+	{
+		CGraphe monGraphe("graphe3_marche_pas.txt");
+		assert(false && "Des fichiers mal formattés doivent levés des exceptions");
+	}
+	catch(Cexception& e)
+	{
+		assert(e.EXClire_valeur() == EXCEPTION_UNABLE_TO_PARSE_FILE);
+	}
+
+	//Un dernier mal formatté pour la route
+	try
+	{
+		CGraphe monGraphe("graphe4_marche_pas.txt");
+		assert(false && "Des fichiers mal formattés doivent levés des exceptions");
+	}
+	catch(Cexception& e)
+	{
+		assert(e.EXClire_valeur() == EXCEPTION_UNABLE_TO_PARSE_FILE);
+	}
 }
 
 /**************************************************
@@ -499,4 +542,27 @@ void CUnitTest::test_ARC()
 	//Test constructeur de recopie
 	CArc monArcCopie(monArc);
 	assert(&monArcCopie.ARCgetDest() == &monArc.ARCgetDest());
+}
+
+void CUnitTest::test_MST_suppEspaces()
+{
+	char text1[] = "     Lorem ipsum sit";
+	CMyString::MSTsuppEspace(text1);
+	assert(strcmp(text1, "Loremipsumsit") == 0);
+
+	char text2[] = "Lorem ipsum sit     ";
+	CMyString::MSTsuppEspace(text2);
+	assert(strcmp(text2, "Loremipsumsit") == 0);
+
+	char text3[] = " a b ffd \n fdfdfd\t ";
+	CMyString::MSTsuppEspace(text3);
+	assert(strcmp(text3, "abffd\nfdfdfd\t") == 0);
+}
+
+void CUnitTest::test_MST_trouverChar()
+{
+	char* text1 = " trouver le line feed\n !";
+	assert(CMyString::MSTtrouverChar(text1, '\n') == 21);
+	assert(CMyString::MSTtrouverChar(text1, '!') == 23);
+	assert(CMyString::MSTtrouverChar(text1, 'e') == 6);
 }

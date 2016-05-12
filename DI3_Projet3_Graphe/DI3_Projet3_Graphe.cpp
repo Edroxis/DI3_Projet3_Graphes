@@ -15,6 +15,8 @@ int main(int argc, char* argv[])
 	test.GCFchargeFichier("graphe1.txt");
 	test.GCFafficherTabs();*/
 
+	//TODO: Supprimer ça ?
+
 	CGraphe grph, *grph2;
 
 	CSommet* som1 = new CSommet(1);
