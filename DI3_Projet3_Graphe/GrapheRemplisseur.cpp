@@ -15,24 +15,73 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: CGrapheRemplisseur
+***************************************************
+Interface de CGrapheRemplisseur.
+Construction d'un CGraphe à partir d'un parseur
+**************************************************/
+
 #include "Graphe.h"
 #include "GrapheRemplisseur.h"
 #include "Cexception.h"
 #include "Parseur.h"
 
+/**************************************************
+* ~CGrapheRemplisseur
+* *************************************************
+* Destructeur de CGrapheRemplisseur
+* *************************************************
+* Entrée : 
+* Pré-condition : 
+* Sortie : 
+* Post-condition : Appel des destructeurs
+* ************************************************/
 CGrapheRemplisseur::~CGrapheRemplisseur() {}
 
+/**************************************************
+* registerObject2Modify
+* *************************************************
+* Garder la référence de l'objet à modifier
+* *************************************************
+* Entrée : objet à modifier
+* Pré-condition : 
+* Sortie : 
+* Post-condition : la référence de l'objet est dans 
+* la variable graphe
+* ************************************************/
 void CGrapheRemplisseur::registerObject2Modify(void* obj)
 {
 	graphe = (CGraphe*)obj;
 }
 
+/**************************************************
+* handleVariable
+* *************************************************
+* Ne fait rien
+* *************************************************
+* Entrée : la variable du fichier en question
+* Pré-condition : 
+* Sortie : 
+* Post-condition : 
+* ************************************************/
 void CGrapheRemplisseur::handleVariable(const CParseurVariable& var)
 {
 	/* On n'a pas besoin des variables, seul la liste des sommets
 	et des arcs nous intéresse */
 }
 
+/**************************************************
+* handleArray
+* *************************************************
+* Est exécuté par le parseur quand un tableau est
+* disponible
+* *************************************************
+* Entrée : le tableau du fichier en question
+* Pré-condition : 
+* Sortie : 
+* Post-condition : 
+* ************************************************/
 void CGrapheRemplisseur::handleArray(const CParseurTableau& arr)
 {
 	if(strcmp(arr.key, "Sommets") == 0)

@@ -15,6 +15,13 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: CGrapheRemplisseur
+***************************************************
+Interface de CGrapheRemplisseur.
+Construction d'un CGraphe à partir d'un parseur
+**************************************************/
+
 #ifndef CGRAPHEREMPLISSEUR_H
 #define CGRAPHEREMPLISSEUR_H
 
@@ -27,13 +34,58 @@ class CGraphe;
 class CGrapheRemplisseur: public CObjetRemplisseur
 {
 public:
+/**************************************************
+* ~CGrapheRemplisseur
+* *************************************************
+* Destructeur de CGrapheRemplisseur
+* *************************************************
+* Entrée : 
+* Pré-condition : 
+* Sortie : 
+* Post-condition : Appel des destructeurs
+* ************************************************/
 	~CGrapheRemplisseur();
+
+/**************************************************
+* registerObject2Modify
+* *************************************************
+* Garder la référence de l'objet à modifier
+* *************************************************
+* Entrée : objet à modifier
+* Pré-condition : 
+* Sortie : 
+* Post-condition : la référence de l'objet est dans 
+* la variable graphe
+* ************************************************/
 	void registerObject2Modify(void* obj);
+
+/**************************************************
+* handleVariable
+* *************************************************
+* Ne fait rien
+* *************************************************
+* Entrée : la variable du fichier en question
+* Pré-condition : 
+* Sortie : 
+* Post-condition : 
+* ************************************************/
 	void handleVariable(const CParseurVariable& var);
+
+/**************************************************
+* handleArray
+* *************************************************
+* Est exécuté par le parseur quand un tableau est
+* disponible
+* *************************************************
+* Entrée : le tableau du fichier en question
+* Pré-condition : 
+* Sortie : 
+* Post-condition : 
+* ************************************************/
 	void handleArray(const CParseurTableau& arr);
 
 private:
-	CGraphe* graphe;
+	CGraphe* graphe; //Objet graphe construit
 };
 
 #endif

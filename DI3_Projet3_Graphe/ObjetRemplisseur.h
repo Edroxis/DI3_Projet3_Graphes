@@ -33,8 +33,8 @@ public:
 	/**************************************************
 	* Destructeur de CObjetRemplisseur
 	* *************************************************
-	* Il est simplement déclaré pour appelé les destructeurs
-	* des classes dérivées en cas de polymotphisme
+	* Il est simplement déclaré pour appeler les destructeurs
+	* des classes dérivées en cas de polymorphisme
 	* *************************************************
 	* Entrée:
 	* Pré-condition :
