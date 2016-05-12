@@ -15,18 +15,55 @@
 | along with this program. If not, see <http://www.gnu.org/licenses/>. |
 |-------------------------------------------------------------------*/
 
+/**************************************************
+Titre: Classe de Gestion des Arcs
+***************************************************
+Corps de la classe CArc.
+Permet de gérer les objets CArc.
+**************************************************/
+
 #include "Arc.h"
 
+/**************************************************
+* CArc
+* *************************************************
+* Constructeur de Carc
+* *************************************************
+* Entrée: sommet de destination (ou d'origine)
+* Pré-condition :
+* Sortie :
+* Post-condition : l'arc est créé
+* ************************************************/
 CArc::CArc(CSommet& SMTparam)
 {
     pSMTARCdest = &SMTparam;
 }
 
-
+/**************************************************
+* ~CArc
+* *************************************************
+* Destructeur de CArc
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie :
+* Post-condition : CArc est détruit
+* ************************************************/
 CArc::~CArc()
 {
+
 }
 
+/**************************************************
+* ARCgetDest
+* *************************************************
+* Obtenir la destination (ou l'origine) de l'arc
+* *************************************************
+* Entrée:
+* Pré-condition :
+* Sortie : Destination (ou origine) de l'arc
+* Post-condition : 
+* ************************************************/
 CSommet& CArc::ARCgetDest() const
 {
     return *pSMTARCdest;

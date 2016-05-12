@@ -37,37 +37,37 @@ private:
 
 public:
 /**************************************************
-* 
-* *************************************************
 * CArc
 * *************************************************
-* Entrée:
+* Constructeur de Carc
+* *************************************************
+* Entrée: sommet de destination (ou d'origine)
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : l'arc est créé
 * ************************************************/
 	CArc(CSommet& SMTparam);
 
 /**************************************************
 * ~CArc
 * *************************************************
-* 
+* Destructeur de CArc
 * *************************************************
 * Entrée:
 * Pré-condition :
 * Sortie :
-* Post-condition : 
+* Post-condition : CArc est détruit
 * ************************************************/
 	~CArc(void);
 
 /**************************************************
 * ARCgetDest
 * *************************************************
-* 
+* Obtenir la destination (ou l'origine) de l'arc
 * *************************************************
 * Entrée:
 * Pré-condition :
-* Sortie :
+* Sortie : Destination (ou origine) de l'arc
 * Post-condition : 
 * ************************************************/
 	CSommet& ARCgetDest() const;
